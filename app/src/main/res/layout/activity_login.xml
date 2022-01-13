@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/thriftshopbackground"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/regular"
+        android:text="@string/app_name"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/backgroundShape"
+        android:layout_width="wrap_content"
+        android:layout_height="464dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_shape" />
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:textStyle="bold"
+        android:text="@string/signup"
+        android:textSize="16sp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneNumber"
+        android:layout_below="@+id/subTitle"
+        android:hint="enter mobile number"
+        app:startIconDrawable="@drawable/ic_launcher_foreground"
+        android:layout_marginTop="50dp"
+        android:textColorHint="@color/accent_color"
+        android:layout_centerHorizontal="true"
+        android:layout_width="350dp"
+        app:boxBackgroundColor="#F2F6FE"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/createQuestion"
+            android:layout_width="match_parent"
+            android:inputType="phone"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phoneNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/ic_otp"
+        android:fontFamily="@font/worksans"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/otp"
+        android:textColor="@color/white"
+        app:backgroundTint="@null" />
+
+    <ImageView
+        android:id="@+id/lin1"
+        android:layout_width="80dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/otp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/line1" />
+
+    <TextView
+        android:id="@+id/signinImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/otp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/worksans"
+        android:text="@string/or_sign_in_using_google"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/line2"
+        android:layout_width="80dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/otp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="2dp"
+        android:layout_toRightOf="@+id/signinImage"
+        android:background="@drawable/line1" />
+
+    <Button
+        android:id="@+id/googleSignButton"
+        android:layout_width="167dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/signinImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_background"
+        android:drawableLeft="@drawable/newback"
+        android:fontFamily="@font/worksans"
+        android:text="Google"
+        android:textSize="14sp"
+        app:backgroundTint="@null" />
+
+</RelativeLayout>

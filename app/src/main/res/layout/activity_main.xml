@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/thriftshopbackground"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:fontFamily="@font/yatra"
+        android:text="@string/thrift_shop"
+        android:textColor="@color/accent_color"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tagLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_text"
+        android:layout_marginStart="200dp"
+        android:fontFamily="@font/regular"
+        android:layout_marginTop="1dp"
+        android:text="@string/tagLine"
+        android:textColor="#100F0F"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/startExploring"
+        android:layout_width="221dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/title_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="550dp"
+        android:backgroundTint="@color/button_color"
+        android:fontFamily="@font/regular"
+        android:text="@string/start_exploring"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

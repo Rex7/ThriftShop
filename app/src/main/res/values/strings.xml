@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ThriftShop</string>
+    <string name="thrift_shop">Thrift Shop</string>
+    <string name="tagLine">your one stop designation</string>
+    <string name="start_exploring">Start Exploring</string>
+    <string name="signup">SignUp</string>
+    <string name="or_sign_in_using_google">or sign in using google</string>
+    <string name="otp">Generate Otp</string>
+    <string name="google">Google</string>
+</resources>
