@@ -20,7 +20,7 @@
 
     <View
         android:id="@+id/backgroundShape"
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="464dp"
         android:layout_centerInParent="true"
         android:background="@drawable/ic_shape" />
@@ -40,7 +40,7 @@
         android:id="@+id/phoneNumber"
         android:layout_below="@+id/subTitle"
         android:hint="enter mobile number"
-        app:startIconDrawable="@drawable/ic_launcher_foreground"
+
         android:layout_marginTop="50dp"
         android:textColorHint="@color/accent_color"
         android:layout_centerHorizontal="true"
@@ -48,7 +48,7 @@
         app:boxBackgroundColor="#F2F6FE"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/createQuestion"
+            android:id="@+id/phoneNumberEdittext"
             android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

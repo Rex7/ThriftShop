@@ -47,7 +47,7 @@
         app:boxBackgroundColor="#F2F6FE"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/createQuestion"
+            android:id="@+id/phoneNumberEdittext"
             android:layout_width="match_parent"
             android:inputType="phone"
             android:layout_height="match_parent"/>

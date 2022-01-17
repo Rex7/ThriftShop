@@ -7,4 +7,27 @@
     <string name="or_sign_in_using_google">or sign in using google</string>
     <string name="otp">Generate Otp</string>
     <string name="google">Google</string>
+    <string name="verification">Verification</string>
+    <string name="otpTitle">please enter the code we sent to +91 90*****931</string>
+    <string name="i_didnt_recive_the_code">i didnt recive the code !!</string>
+    <string name="resend_otp">Resend Otp</string>
+    <string name="proceed">PROCEED</string>
+    <string name="name">hello Chonu</string>
+    <string name="exploring">start exploring</string>
+    <string name="categories">Categories</string>
+    <string name="category">category</string>
+    <string name="price">$200</string>
+    <string name="nameOfProduct">high heels</string>
+    <string name="featuredProduct">Featured Products</string>
+    <string name="logout">logout</string>
+    <string name="Account">Account</string>
+    <string name="details">details</string>
+    <string name="Home">Home</string>
+    <string name="open_navigation">open</string>
+    <string name="close_navigation">close</string>
+    <array name="suggestion">
+        <item>jacket</item>
+        <item>t Shirt</item>
+        <item>pant</item>
+    </array>
 </resources>
