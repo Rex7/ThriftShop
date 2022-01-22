@@ -8,8 +8,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThriftShop">
         <activity
+            android:name=".SearchApp"
+            android:exported="true" />
+        <activity
             android:name=".SearchAbleActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -26,15 +29,10 @@
 
         <activity
             android:name=".ContentPage"
-            android:exported="true" >
+            android:exported="true">
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value=""/>
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                android:value="" />
         </activity>
         <activity
             android:name=".VerificationActivity"

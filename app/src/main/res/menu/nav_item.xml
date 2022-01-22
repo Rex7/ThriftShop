@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/Med"
-            android:icon="@drawable/ic_home"
-            android:title="@string/Home"
 
-            />
-    </group>
     <item
-        android:id="@+id/mainMenu"
-        android:title="@string/details">
-        <menu>
-            <!--<item-->
-            <!--android:id="@+id/AboustUs"-->
-            <!--android:icon="@drawable/ic_people"-->
-            <!--android:title="About Us" />-->
-            <item
-                android:id="@+id/manage"
-                android:icon="@drawable/ic_setting"
-                android:title="@string/Account"
-                android:visible="false" />
-            <item
-                android:id="@+id/logout"
-                android:icon="@drawable/ic_logout"
-                android:title="@string/logout"
-                android:visible="false" />
+        android:id="@+id/Med"
+        android:icon="@drawable/ic_home"
+        android:title="@string/Home"
 
+        />
 
-        </menu>
-    </item>
+    <item
+        android:id="@+id/search_drawer"
+        android:icon="@drawable/ic_search"
+        android:title="@string/details" />
+    <item
+        android:id="@+id/manage"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/Account"
+        android:visible="true" />
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/logout"
+        android:visible="true" />
+
 
 </menu>
+
+
