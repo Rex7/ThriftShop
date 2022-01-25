@@ -1,4 +1,4 @@
-package com.example.thriftshop;
+package com.example.thriftshop.searchcontent;
 
 import android.content.Context;
 import android.util.Log;
@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.thriftshop.homecontent.ChildModel;
+import com.example.thriftshop.R;
 
 import java.util.ArrayList;
 
@@ -21,10 +23,14 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
     private Context ctx;
     private ArrayList<ChildModel> childModels;
     private ArrayList<ChildModel> filterModel;
-    public  SearchAdapter(ArrayList<ChildModel> childModels,Context ctx){
+    private TransferData transferData;
+    FilterBottomSheet filterBottomSheet;
+    int count=0;
+    public  SearchAdapter(ArrayList<ChildModel> childModels,Context ctx,TransferData data){
         this.ctx=ctx;
         this.childModels=childModels;
         this.filterModel=childModels;
+        this.transferData=data;
     }
 
     @NonNull
@@ -37,7 +43,7 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.Viewholders holder, int position) {
-        holder.nameOfProduct.setText(filterModel.get(position).getName());
+        holder.nameOfProduct.setText(filterModel.get(position).getProductName());
         holder.price.setText(filterModel.get(position).getPrice());
         Glide.with(ctx).load(filterModel.get(position).getIcon()).into(holder.imageView);
     }
@@ -71,10 +77,10 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
                     for (ChildModel row : childModels) {
 
 
-                        if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getProductName().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                             Log.v("SelectedVal",""+filteredList.size());
-                            Log.v("WhoIsMe",""+row.getName());
+                            Log.v("WhoIsMe",""+row.getProductName());
                             Log.v("WhoIsMe",""+row.getPrice());
 
                         }
@@ -83,10 +89,11 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
 
 
                     filterModel = filteredList;
-                }
 
+                }
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filterModel;
+                transferData.setData(filterModel.size());
                 return filterResults;
             }
 
@@ -95,14 +102,13 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
 
                 filterModel = (ArrayList<ChildModel>) filterResults.values;
                 for (int i=0;i<filterModel.size();i++){
-                    Log.v("TAG",""+filterModel.get(i).getName());
+                    Log.v("TAG",""+filterModel.get(i).getProductName());
                 }
                 notifyDataSetChanged();
 
             }
         };
     }
-
 
 
 }

@@ -8,10 +8,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThriftShop">
         <activity
-            android:name=".SearchApp"
+            android:name=".searchcontent.SearchAppActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:exported="true" />
         <activity
-            android:name=".SearchAbleActivity"
+            android:name=".searchcontent.SearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -23,22 +24,23 @@
         </activity>
 
         <provider
-            android:name=".MySuggestionProvider"
+            android:name=".searchcontent.MySuggestionProvider"
             android:authorities=".SuggestionProvider"
             android:exported="false" />
 
         <activity
             android:name=".ContentPage"
+
             android:exported="true">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="" />
         </activity>
         <activity
-            android:name=".VerificationActivity"
+            android:name=".login.VerificationActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

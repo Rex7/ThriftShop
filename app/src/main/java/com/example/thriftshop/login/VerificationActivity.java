@@ -1,4 +1,4 @@
-package com.example.thriftshop;
+package com.example.thriftshop.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.thriftshop.R;
 
 public class VerificationActivity extends AppCompatActivity implements TextWatcher {
     TextView resendOtp;

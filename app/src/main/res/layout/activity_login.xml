@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/thriftshopbackground"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <TextView
         android:id="@+id/title_text"
@@ -39,7 +39,6 @@
         android:id="@+id/phoneNumber"
         android:layout_below="@+id/subTitle"
         android:hint="enter mobile number"
-        app:startIconDrawable="@drawable/ic_launcher_foreground"
         android:layout_marginTop="50dp"
         android:textColorHint="@color/accent_color"
         android:layout_centerHorizontal="true"

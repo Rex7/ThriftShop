@@ -12,7 +12,7 @@
     <string name="i_didnt_recive_the_code">i didnt recive the code !!</string>
     <string name="resend_otp">Resend Otp</string>
     <string name="proceed">PROCEED</string>
-    <string name="name">hello Chonu</string>
+    <string name="name">Hello</string>
     <string name="exploring">start exploring</string>
     <string name="categories">Categories</string>
     <string name="category">category</string>
@@ -25,6 +25,19 @@
     <string name="Home">Home</string>
     <string name="open_navigation">open</string>
     <string name="close_navigation">close</string>
+    <string name="filter">filter</string>
+    <string name="todo">TODO</string>
+    <string name="search">Search</string>
+    <string name="sort">Sort</string>
+    <string name="UserName">Madonna</string>
+    <string name="history">History</string>
+    <string name="person">profile</string>
+    <string name="men">men</string>
+    <string name="women">women</string>
+    <string name="kids">kids</string>
+    <string name="filtered_text">filtered %1$d </string>
+    <string name="noResults">no result found.</string>
+
     <array name="suggestion">
         <item>jacket</item>
         <item>t Shirt</item>

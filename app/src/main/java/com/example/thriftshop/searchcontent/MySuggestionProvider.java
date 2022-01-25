@@ -1,4 +1,4 @@
-package com.example.thriftshop;
+package com.example.thriftshop.searchcontent;
 
 import static android.content.SearchRecentSuggestionsProvider.DATABASE_MODE_QUERIES;
 

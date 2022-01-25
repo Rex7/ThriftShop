@@ -1,11 +1,10 @@
-package com.example.thriftshop;
+package com.example.thriftshop.homecontent;
 
 import android.content.Context;
 
 import java.util.ArrayList;
 
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.thriftshop.R;
 
 public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders> implements Filterable {
         private  Context ctx;
@@ -34,13 +34,12 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
         @Override
         public Viewholders onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.iten_childrow,viewGroup,false);
-
             return new Viewholders(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull Viewholders viewholders, int i) {
-            viewholders.nameOfProduct.setText(childModels.get(i).getName());
+            viewholders.nameOfProduct.setText(childModels.get(i).getProductName());
             viewholders.price.setText(childModels.get(i).getPrice());
             Glide.with(ctx).load(childModels.get(i).getIcon()).into(viewholders.imageView);
 
@@ -65,10 +64,10 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
                     for (ChildModel row : childModels) {
 
 
-                            if (row.getName().toLowerCase().contains(charString.toLowerCase())) {
+                            if (row.getProductName().toLowerCase().contains(charString.toLowerCase())) {
                                 filteredList.add(row);
                                 Log.v("SelectedVal",""+filteredList.size());
-                                Log.v("TAG",""+row.getName());
+                                Log.v("TAG",""+row.getProductName());
                                 Log.v("TAG",""+row.getPrice());
                             }
                         }
@@ -88,9 +87,8 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
 
                 filterModel = (ArrayList<ChildModel>) filterResults.values;
                for (int i=0;i<filterModel.size();i++){
-                   Log.v("TAG",""+filterModel.get(i).getName());
+                   Log.v("TAG",""+filterModel.get(i).getProductName());
                }
-
                 notifyDataSetChanged();
 
             }

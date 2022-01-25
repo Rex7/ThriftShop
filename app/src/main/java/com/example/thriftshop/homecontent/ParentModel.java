@@ -1,5 +1,7 @@
-package com.example.thriftshop;
+package com.example.thriftshop.homecontent;
 
+
+import com.example.thriftshop.homecontent.ChildModel;
 
 import java.util.ArrayList;
 

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="90dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bottom_sheet"
+        app:behavior_hideable="false"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="2dp" >
+
+        <TextView
+            android:id="@+id/titleText_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/robo"
+            android:text="@string/category"
+            android:textSize="21sp" />
+
+        <LinearLayout
+            android:id="@+id/category_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titleText_bottom"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/men"
+                android:text="@string/men"
+
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#000"
+                android:background="#D1CCCC"
+                android:fontFamily="@font/robo"
+                app:backgroundTint="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/women"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/women"
+                android:textColor="#000"
+                android:background="#D1CCCC"
+                android:fontFamily="@font/robo"
+                app:backgroundTint="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/kids"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/kids"
+                app:backgroundTint="@null"
+                android:textColor="#000"
+                android:background="#D1CCCC"
+                android:fontFamily="@font/robo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/type_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/typeText"
+            android:orientation="horizontal">
+        <Button
+            android:id="@+id/used"
+            android:text="Used"
+            app:backgroundTint="@null"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:background="#D1CCCC"
+            android:fontFamily="@font/robo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/unused"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="unused"
+            app:backgroundTint="@null"
+            android:textColor="#000"
+            android:background="#D1CCCC"
+            android:fontFamily="@font/robo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/rent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="rent"
+            android:textColor="#000"
+            android:background="#D1CCCC"
+            android:fontFamily="@font/robo"
+            app:backgroundTint="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/priceType"
+            android:text="price"
+            android:fontFamily="@font/robo"
+            android:textSize="21sp"
+            android:layout_below="@+id/type_layout"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:id="@+id/typeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/category_layout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/robo"
+            android:text="Type"
+            android:textSize="21sp" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_below="@id/priceType"
+            android:layout_centerHorizontal="true"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/filterButton"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/ic_otp"
+
+            android:text="@string/filter"
+            app:backgroundTint="@null" />
+
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

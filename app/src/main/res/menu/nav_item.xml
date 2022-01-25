@@ -3,7 +3,7 @@
 
 
     <item
-        android:id="@+id/Med"
+        android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="@string/Home"
 
@@ -12,11 +12,11 @@
     <item
         android:id="@+id/search_drawer"
         android:icon="@drawable/ic_search"
-        android:title="@string/details" />
+        android:title="@string/search" />
     <item
         android:id="@+id/manage"
-        android:icon="@drawable/ic_setting"
-        android:title="@string/Account"
+        android:icon="@drawable/ic_person"
+        android:title="@string/person"
         android:visible="true" />
     <item
         android:id="@+id/logout"

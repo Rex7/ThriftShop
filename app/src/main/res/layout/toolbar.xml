@@ -9,6 +9,5 @@
     android:elevation="4dp"
    android:background="@color/white"
     app:layout_collapseMode="pin"
-
     >
 </androidx.appcompat.widget.Toolbar>

@@ -1,4 +1,4 @@
-package com.example.thriftshop;
+package com.example.thriftshop.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.thriftshop.ContentPage;
+import com.example.thriftshop.R;
 
 public class LoginActivity extends AppCompatActivity {
     Button otp;
@@ -21,9 +24,10 @@ public class LoginActivity extends AppCompatActivity {
         otp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clearData();
-                Intent intent=new Intent(getApplicationContext(),ContentPage.class);
+
+                Intent intent=new Intent(getApplicationContext(), ContentPage.class);
                 startActivity(intent);
+                clearData();
 
             }
         });
