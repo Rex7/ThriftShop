@@ -137,9 +137,10 @@
         android:layout_below="@+id/resendOtp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
+        android:gravity="center"
         android:background="@drawable/ic_proceed"
-        android:text="@string/proceed"
         android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/proceed"
 
         app:backgroundTint="@null" />
 
