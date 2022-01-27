@@ -36,7 +36,7 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
         setContentView(R.layout.activity_content_page);
         bottomNavigationView=findViewById(R.id.bottomview);
         productIml=ProductImpl.getDatabase(getApplicationContext());
-        dummyData();
+        //dummyData();
        productArrayList= (ArrayList<Product>) productIml.productDao().getAllProduct();
         Log.v("ContentPage","onCreate"+productIml.productDao().getTableSize());
 

@@ -103,10 +103,8 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     for (Product product : parentModel) {
 
                         for (int i=0;i<parentModel.size();i++){
-                            Log.v("SelectedVal",""+product.getProductName()+" charString "+charString);
                             if (product.getProductName().toLowerCase().contains(charString.toLowerCase())) {
                                 filteredList.add(product);
-                                Log.v("SelectedVal",""+filteredList.size());
                             }
                         }
 

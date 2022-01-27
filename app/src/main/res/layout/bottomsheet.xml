@@ -28,46 +28,50 @@
             android:text="@string/category"
             android:textSize="21sp" />
 
+
         <LinearLayout
             android:id="@+id/category_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleText_bottom"
             android:orientation="horizontal">
-            <Button
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggleCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/men"
                 android:text="@string/men"
-
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="10dp"
                 android:textColor="#000"
-                android:background="#D1CCCC"
+
+               style=""
                 android:fontFamily="@font/robo"
-                app:backgroundTint="@null"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/women"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="45dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/women"
                 android:textColor="#000"
-                android:background="#D1CCCC"
                 android:fontFamily="@font/robo"
-                app:backgroundTint="@null"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/kids"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:text="@string/kids"
-                app:backgroundTint="@null"
+
                 android:textColor="#000"
-                android:background="#D1CCCC"
+
                 android:fontFamily="@font/robo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            </com.google.android.material.button.MaterialButtonToggleGroup>
 
         </LinearLayout>
         <LinearLayout
@@ -76,14 +80,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/typeText"
             android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/typetoggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
         <Button
             android:id="@+id/used"
             android:text="Used"
-            app:backgroundTint="@null"
+
             android:layout_marginLeft="50dp"
             android:layout_marginTop="10dp"
             android:textColor="#000"
-            android:background="#D1CCCC"
+
             android:fontFamily="@font/robo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -92,23 +100,26 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:text="unused"
-            app:backgroundTint="@null"
+
             android:textColor="#000"
-            android:background="#D1CCCC"
+
             android:fontFamily="@font/robo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/rent"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="rent"
-            android:textColor="#000"
-            android:background="#D1CCCC"
-            android:fontFamily="@font/robo"
-            app:backgroundTint="@null"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <Button
+                android:id="@+id/rent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+
+                android:fontFamily="@font/robo"
+
+                android:text="rent"
+                android:textColor="#000" />
         </LinearLayout>
         <TextView
             android:id="@+id/priceType"

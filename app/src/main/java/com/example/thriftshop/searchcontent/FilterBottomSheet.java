@@ -14,16 +14,21 @@ import com.example.thriftshop.homecontent.ChildModel;
 import com.example.thriftshop.searchcontent.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import java.util.ArrayList;
 
-public class FilterBottomSheet extends BottomSheetDialogFragment implements View.OnClickListener {
+public class FilterBottomSheet extends BottomSheetDialogFragment implements View.OnClickListener, MaterialButtonToggleGroup.OnButtonCheckedListener {
 
     private BottomSheetBehavior bottomSheetBehavior;
-    Button men,women,kids,used,unused,rent,filter;
+    Button filter;
+    String category = "";
+    int type=0;
     ArrayList<String> filterOptions=new ArrayList<>();
     Context ctx;
     SearchActivity searchActivity;
+    MaterialButtonToggleGroup categooryToggle;
+    MaterialButtonToggleGroup typeToggle;
     private static  String TAG="FilterBottomSheet";
     private String query;
 
@@ -36,24 +41,13 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements View
     public void setupDialog(Dialog dialog, int style) {
         super.setupDialog(dialog, style);
         View v = View.inflate(getContext(), R.layout.bottomsheet, null);
+        categooryToggle=v.findViewById(R.id.toggleCategory);
+        typeToggle=v.findViewById(R.id.typetoggle);
+
+
         //all category button initialized
-        men=v.findViewById(R.id.men);
-        women=v.findViewById(R.id.women);
-        kids=v.findViewById(R.id.kids);
-        used=v.findViewById(R.id.used);
-        unused=v.findViewById(R.id.unused);
-        rent=v.findViewById(R.id.rent);
-        filter=v.findViewById(R.id.filterButton);
-
-
-
-        men.setOnClickListener(this);
-        women.setOnClickListener(this);
-        kids.setOnClickListener(this);
-        unused.setOnClickListener(this);
-        used.setOnClickListener(this);
-        rent.setOnClickListener(this);
-
+       categooryToggle.addOnButtonCheckedListener(this);
+       typeToggle.addOnButtonCheckedListener(this);
         dialog.setContentView(v);
     }
 
@@ -65,7 +59,7 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements View
     @Override
     public void onClick(View view) {
     filter.setText("searching...");
-     searchActivity= (SearchActivity) getActivity();
+
       setFilterOptions(view.getId());
     }
 
@@ -78,11 +72,11 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements View
     public void setFilterOptions(int buttonId){
         switch (buttonId){
             case R.id.men:
-                searchActivity.handleSearchQueryFilter(query,"women",1);
+                searchActivity.handleSearchQueryFilter(query,"men",0);
                 break;
 
             case R.id.used:
-                searchActivity.handleSearchQueryFilter(query,"men",1);
+                searchActivity.handleSearchQueryFilter(query,"women",1);
                 break;
 
 
@@ -92,6 +86,82 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements View
 
     }
 
+
+    @Override
+    public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+        searchActivity= (SearchActivity) getActivity();
+
+     switch (group.getId()){
+         case R.id.toggleCategory:
+             if(checkedId==R.id.men){
+                 category="men";
+                 if(type==0){
+                    searchActivity.handleSearchByCategory(query,category);
+                 }
+                 else{
+                     searchActivity.handleSearchQueryFilter(query,category,type);
+                     Log.v("FilterBottomSheet",""+type);
+                 }
+
+             }
+             else  if(checkedId==R.id.women){
+                 Log.v("FilterBottom","Category women");
+                 category="women";
+                 if(type==0){
+                     searchActivity.handleSearchByCategory(query,category);
+                 }
+                 else{
+                     searchActivity.handleSearchQueryFilter(query,category,type);
+                 }
+
+             }
+             else  if(checkedId==R.id.kids){
+                 category="kids";
+                 if(type==0){
+                     searchActivity.handleSearchByCategory(query,category);
+                 }
+                 else{
+                     searchActivity.handleSearchQueryFilter(query,category,type);
+                 }
+
+             }
+
+             break;
+         case R.id.typetoggle:
+             if(checkedId==R.id.used){
+                 type=1;
+                 if(category.isEmpty()){
+                    searchActivity.handleSearchByType(query,type);
+                     Log.v("FilterBottomSheet","Called");
+                 }
+                 else{
+                     searchActivity.handleSearchQueryFilter(query,category,type);
+                     Log.v("FilterBottomSheet","FullFilterCalled");
+
+                 }
+             }
+             else  if(checkedId==R.id.unused){
+                 type=2;
+                 if(category.isEmpty()){
+                     searchActivity.handleSearchByType(query,type);
+                 }
+                 else{
+                     searchActivity.handleSearchQueryFilter(query,category,type);
+                 }
+             }
+             else  if(checkedId==R.id.rent){
+                 type=3;
+                 if(category.isEmpty()){
+                     searchActivity.handleSearchByType(query,type);
+                 }
+                 else{
+                     searchActivity.handleSearchQueryFilter(query,category,type);
+                 }
+
+             }
+             break;
+     }
+    }
 
 }
 

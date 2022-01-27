@@ -52,7 +52,6 @@ public class SearchActivity extends AppCompatActivity implements  TransferData{
             @Override
             public void onClick(View view) {
 
-               // filterBottomSheet.setData(populateParentArray());
                 filterBottomSheet.setQuery(query);
                 filterBottomSheet.show(getSupportFragmentManager(),"showing");
             }
@@ -76,15 +75,31 @@ public class SearchActivity extends AppCompatActivity implements  TransferData{
         return  size;
     }
     public void  handleSearchQueryFilter(String productName,String category,int type){
-       ArrayList<Product> productArrayList= (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(query,category);
-       Log.v("SearchActivity",""+(productimpl.productDao().getAllProduct(category)).size());
-        Log.v("SearchActivityCategory",""+(productimpl.productDao().getProductByName(productName)).size());
-       Log.v("SearchActivitygetByName",""+productArrayList.size());
-        Log.v("SearchActivity",""+query);
+
+       ArrayList<Product> productArrayList= (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(query,category,type);
+       Log.v("SearchActivity",""+productArrayList.size());
+       filterBottomSheet.updateButtonCount(productArrayList.size());
+        Log.v("SearchActivity","handleSearchQueryFilter");
          searchAdapter=new SearchAdapter(productArrayList,getApplicationContext(),this);
          recyclerView.setAdapter(searchAdapter);
          searchAdapter.notifyDataSetChanged();
 
+    }
+    public  void handleSearchByCategory(String productName,String category){
+        ArrayList<Product> productArrayList= (ArrayList<Product>) productimpl.productDao().getProductByCategoryFilter(query,category);
+        Log.v("SearchActivity","handleSearchByCategory"+productArrayList.size());
+        filterBottomSheet.updateButtonCount(productArrayList.size());
+        searchAdapter=new SearchAdapter(productArrayList,getApplicationContext(),this);
+        recyclerView.setAdapter(searchAdapter);
+        searchAdapter.notifyDataSetChanged();
+    }
+    public void handleSearchByType(String productName,int type){
+        ArrayList<Product> productArrayList= (ArrayList<Product>) productimpl.productDao().getProductByTypeFilter(query,type);
+        Log.v("SearchActivity","handleSearchByType"+productArrayList.size());
+        filterBottomSheet.updateButtonCount(productArrayList.size());
+        searchAdapter=new SearchAdapter(productArrayList,getApplicationContext(),this);
+        recyclerView.setAdapter(searchAdapter);
+        searchAdapter.notifyDataSetChanged();
     }
 
 

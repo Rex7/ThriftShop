@@ -22,8 +22,20 @@ public interface productDao {
     @Query("select * from product where productName LIKE  '%'|| :name || '%' ")
     List<Product> getProductByName(String name);
 
-    @Query("SELECT * from product where (:genderCategory IS NOT NULL AND genderCategory IS :genderCategory ) " +
-            " AND (:productName IS NOT NULL AND productName LIKE '%' || :productName ||'%' )")
-    List<Product> getProductAfterFilter(String productName,String genderCategory);
+    @Query("SELECT * from product where (:genderCategory IS NOT NULL AND genderCategory  =:genderCategory ) " +
+            " AND (:productName IS NOT NULL AND productName LIKE '%' || :productName ||'%' )" +
+     " AND (:type IS NOT NULL AND type IN ( :type))")
+    List<Product> getProductAfterFilter(String productName,String genderCategory,int type);
+
+    @Query("SELECT * from product where (:genderCategory IS NOT NULL AND genderCategory  =:genderCategory ) " +
+            " AND (:productName IS NOT NULL AND productName LIKE '%' || :productName ||'%' )" )
+    List<Product> getProductByCategoryFilter(String productName,String genderCategory);
+
+    @Query("SELECT * from product where (:type IS NOT NULL AND type =:type ) " +
+            " AND (:productName IS NOT NULL AND productName LIKE '%' || :productName ||'%' )" )
+    List<Product> getProductByTypeFilter(String productName,int type);
+
+
+
 
 }
