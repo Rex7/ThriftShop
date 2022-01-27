@@ -116,7 +116,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:layout_marginStart="50dp"
-        android:text="@string/i_didnt_recive_the_code" />
+        android:text="@string/didntreceivethecode" />
 
     <TextView
         android:id="@+id/resendOtp"
@@ -129,7 +129,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/resend_otp"
-        android:textColor="@color/button_color" />
+        android:textColor="@color/switch_button_color" />
 
     <Button
         android:layout_width="wrap_content"

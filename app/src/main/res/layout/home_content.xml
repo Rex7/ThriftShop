@@ -36,8 +36,8 @@
             android:layout_toRightOf="@+id/profile"
             android:fontFamily="@font/robo"
             android:text="@string/name"
-            android:textColor="#1B0909"
-            android:textSize="14sp" />
+            android:textColor="#330504"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/nameSub"
@@ -48,7 +48,8 @@
             android:fontFamily="@font/robo"
             android:text="@string/UserName"
             android:textColor="#0B0707"
-            android:textSize="21sp"
+            android:textStyle="bold"
+            android:textSize="25sp"
             />
 
         <androidx.appcompat.widget.SearchView

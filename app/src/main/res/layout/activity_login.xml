@@ -38,7 +38,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phoneNumber"
         android:layout_below="@+id/subTitle"
-        android:hint="enter mobile number"
+        android:hint="@string/enter_mobile_number"
         android:layout_marginTop="50dp"
         android:textColorHint="@color/accent_color"
         android:layout_centerHorizontal="true"
@@ -48,30 +48,33 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneNumberEdittext"
             android:layout_width="match_parent"
+            android:gravity="center_horizontal"
             android:inputType="phone"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/otp"
+        android:text="@string/otp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:fontFamily="@font/worksans"
+        android:background="@drawable/ic_otp"
+        app:backgroundTint="@null"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/phoneNumber"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="@drawable/ic_otp"
-        android:fontFamily="@font/worksans"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="@string/otp"
-        android:textColor="@color/white"
-        app:backgroundTint="@null" />
+      />
 
     <ImageView
         android:id="@+id/lin1"
         android:layout_width="80dp"
         android:layout_height="1dp"
         android:layout_below="@+id/otp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/line1" />
 
@@ -106,7 +109,8 @@
         android:background="@drawable/ic_background"
         android:drawableLeft="@drawable/newback"
         android:fontFamily="@font/worksans"
-        android:text="Google"
+        android:text="@string/google"
+        android:textAllCaps="false"
         android:textSize="14sp"
         app:backgroundTint="@null" />
 

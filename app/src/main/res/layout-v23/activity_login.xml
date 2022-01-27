@@ -50,22 +50,24 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneNumberEdittext"
             android:inputType="phone"
+            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/otp"
+        android:text="@string/otp"
+        android:fontFamily="@font/worksans"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/phoneNumber"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@drawable/ic_otp"
-        android:fontFamily="@font/worksans"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="@string/otp"
-        android:textColor="@color/white"
         app:backgroundTint="@null" />
 
     <ImageView
@@ -100,18 +102,18 @@
 
     <Button
         android:id="@+id/googleSignButton"
+        android:text="@string/google"
+        android:textSize="14sp"
+        android:fontFamily="@font/worksans"
+        android:textAllCaps="false"
+        android:background="@drawable/ic_background"
+        android:drawableLeft="@drawable/newback"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:backgroundTint="@null"
         android:layout_width="167dp"
         android:layout_height="46dp"
         android:layout_below="@+id/signinImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_background"
-        android:drawableLeft="@drawable/newback"
-        android:foreground="?android:attr/selectableItemBackground"
-
-        android:fontFamily="@font/worksans"
-        android:text="@string/google"
-        android:textSize="14sp"
-        app:backgroundTint="@null" />
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>
