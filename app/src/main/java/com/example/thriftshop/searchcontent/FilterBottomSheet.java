@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.example.thriftshop.R;
 import com.example.thriftshop.homecontent.ChildModel;
+import com.example.thriftshop.searchcontent.model.Product;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -20,10 +21,11 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements View
 
     private BottomSheetBehavior bottomSheetBehavior;
     Button men,women,kids,used,unused,rent,filter;
-    ArrayList<ChildModel> childModels;
     ArrayList<String> filterOptions=new ArrayList<>();
     Context ctx;
+    SearchActivity searchActivity;
     private static  String TAG="FilterBottomSheet";
+    private String query;
 
     public FilterBottomSheet(Context ctx) {
         this.ctx=ctx;
@@ -56,25 +58,38 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements View
     }
 
 
-
+   public  void setQuery(String query){
+        this.query=query;
+   }
 
     @Override
     public void onClick(View view) {
     filter.setText("searching...");
-    SearchActivity searchActivity= (SearchActivity) getActivity();
-    searchActivity.HandleSearchQuery("j");
+     searchActivity= (SearchActivity) getActivity();
+      setFilterOptions(view.getId());
     }
 
-
-
-    public void setData(ArrayList<ChildModel> populateParentArray) {
-        this.childModels=populateParentArray;
-    }
     public void updateButtonCount(int count){
        if(filter!=null){
            filter.setText(getResources().getString(R.string.filtered_text,count));
            Log.v(TAG, "updateButtonCount: "+count);
        }
+    }
+    public void setFilterOptions(int buttonId){
+        switch (buttonId){
+            case R.id.men:
+                searchActivity.handleSearchQueryFilter(query,"women",1);
+                break;
+
+            case R.id.used:
+                searchActivity.handleSearchQueryFilter(query,"men",1);
+                break;
+
+
+
+
+        }
+
     }
 
 

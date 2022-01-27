@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.thriftshop.R;
 import com.example.thriftshop.searchcontent.SearchActivity;
 import com.example.thriftshop.searchcontent.SearchAppActivity;
+import com.example.thriftshop.searchcontent.model.Product;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,9 @@ public class HomeFragment extends Fragment {
     ParentAdapter parentAdapter;
     SearchView searchView;
     Context ctx;
-    public HomeFragment(Context ctx){
+    ArrayList<Product> productList;
+    public HomeFragment(Context ctx,ArrayList<Product> productList){
+        this.productList=productList;
         this.ctx=ctx;
     }
     @Nullable
@@ -40,16 +43,14 @@ public class HomeFragment extends Fragment {
         searchView = view.findViewById(R.id.searchbar);
 
         parentRecycler = view.findViewById((R.id.main_recyclerview));
-        parentAdapter = new ParentAdapter(ctx.getApplicationContext(), populateParentArray());
+        parentAdapter = new ParentAdapter(ctx.getApplicationContext(),productList);
         parentRecycler.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
         parentRecycler.setAdapter(parentAdapter);
         ViewCompat.setNestedScrollingEnabled(parentRecycler, false);
         parentRecycler.setHasFixedSize(true);
         SearchManager searchManager = (SearchManager) ctx.getSystemService(SEARCH_SERVICE);
 
-
         searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(ctx, SearchActivity.class)));
-        searchView.setOnClickListener(val -> startActivity(new Intent(ctx.getApplicationContext(), SearchAppActivity.class)));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

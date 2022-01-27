@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thriftshop.homecontent.ChildModel;
 import com.example.thriftshop.R;
+import com.example.thriftshop.searchcontent.model.Product;
+import com.example.thriftshop.searchcontent.model.ProductImpl;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
@@ -27,9 +29,10 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity implements  TransferData{
     RecyclerView recyclerView;
     SearchAdapter searchAdapter;
-    ArrayList<ChildModel> filterModel;
+    ArrayList<Product> filterModel;
     BottomSheetBehavior bottomSheetBehavior;
     FilterBottomSheet filterBottomSheet;
+    ProductImpl productimpl;
     ImageView filter;
     Toolbar toolbar;
     String query;
@@ -42,13 +45,15 @@ public class SearchActivity extends AppCompatActivity implements  TransferData{
         recyclerView = findViewById(R.id.recycleView);
         toolbar = findViewById(R.id.toolbar_Search);
         setSupportActionBar(toolbar);
+        productimpl=ProductImpl.getDatabase(getApplicationContext());
         filter=findViewById(R.id.filterIcon);
         filterBottomSheet =new FilterBottomSheet(getApplicationContext());
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                filterBottomSheet.setData(populateParentArray());
+               // filterBottomSheet.setData(populateParentArray());
+                filterBottomSheet.setQuery(query);
                 filterBottomSheet.show(getSupportFragmentManager(),"showing");
             }
         });
@@ -62,35 +67,33 @@ public class SearchActivity extends AppCompatActivity implements  TransferData{
              query = getIntent().getStringExtra(SearchManager.QUERY);
             Log.d("TAG", "onCreate: " + query);
 
-            HandleSearchQuery(query);
+           HandleSearchQuery(query);
         }
     }
 
     public int HandleSearchQuery(String query) {
-
         searchAdapter.getFilter().filter(query);
         return  size;
     }
+    public void  handleSearchQueryFilter(String productName,String category,int type){
+       ArrayList<Product> productArrayList= (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(query,category);
+       Log.v("SearchActivity",""+(productimpl.productDao().getAllProduct(category)).size());
+        Log.v("SearchActivityCategory",""+(productimpl.productDao().getProductByName(productName)).size());
+       Log.v("SearchActivitygetByName",""+productArrayList.size());
+        Log.v("SearchActivity",""+query);
+         searchAdapter=new SearchAdapter(productArrayList,getApplicationContext(),this);
+         recyclerView.setAdapter(searchAdapter);
+         searchAdapter.notifyDataSetChanged();
+
+    }
 
 
-    public ArrayList<ChildModel> populateParentArray() {
-        ArrayList<ChildModel> childModels = new ArrayList<>();
+    public ArrayList<Product> populateParentArray() {
 
-        childModels.add(new ChildModel("High heels", "$100", R.drawable.highheels));
-        childModels.add(new ChildModel("T Shirt ", "$250", R.drawable.tshirt));
-        childModels.add(new ChildModel("jeans", "$80", R.drawable.jeans));
-        childModels.add(new ChildModel("jewels", "$180", R.drawable.jewels));
-        childModels.add(new ChildModel("Necklace", "$100", R.drawable.necklace));
-        childModels.add(new ChildModel("Ring", "$100", R.drawable.ring));
-        childModels.add(new ChildModel("Earring", "$100", R.drawable.earring));
-        childModels.add(new ChildModel("Bracelet", "$100", R.drawable.bracelrt));
-        childModels.add(new ChildModel("jacket denim", "$100", R.drawable.jacketdenim));
-        childModels.add(new ChildModel("Shoe louis", "$100", R.drawable.shoelouis));
-        childModels.add(new ChildModel("Saree", "$100", R.drawable.saree));
-        childModels.add(new ChildModel("black jacket", "$100", R.drawable.blackjacket));
+  ArrayList<Product> productArrayList= (ArrayList<Product>) productimpl.productDao().getAllProduct();
+  return productArrayList;
 
 
-        return childModels;
 
     }
 

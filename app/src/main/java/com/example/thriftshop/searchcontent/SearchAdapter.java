@@ -16,17 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.thriftshop.homecontent.ChildModel;
 import com.example.thriftshop.R;
+import com.example.thriftshop.searchcontent.model.Product;
+import com.example.thriftshop.searchcontent.model.ProductImpl;
 
 import java.util.ArrayList;
 
 public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewholders> implements Filterable {
     private Context ctx;
-    private ArrayList<ChildModel> childModels;
-    private ArrayList<ChildModel> filterModel;
+    private ArrayList<Product> childModels;
+    private ArrayList<Product> filterModel;
     private TransferData transferData;
     FilterBottomSheet filterBottomSheet;
     int count=0;
-    public  SearchAdapter(ArrayList<ChildModel> childModels,Context ctx,TransferData data){
+    public  SearchAdapter(ArrayList<Product> childModels, Context ctx, TransferData data){
         this.ctx=ctx;
         this.childModels=childModels;
         this.filterModel=childModels;
@@ -44,8 +46,8 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.Viewholders holder, int position) {
         holder.nameOfProduct.setText(filterModel.get(position).getProductName());
-        holder.price.setText(filterModel.get(position).getPrice());
-        Glide.with(ctx).load(filterModel.get(position).getIcon()).into(holder.imageView);
+        holder.price.setText(""+filterModel.get(position).getPrice());
+        Glide.with(ctx).load(filterModel.get(position).getImage()).into(holder.imageView);
     }
 
     @Override
@@ -73,18 +75,34 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
                 if (charString.isEmpty()) {
                     filterModel = childModels;
                 } else {
-                    ArrayList<ChildModel> filteredList = new ArrayList<>();
-                    for (ChildModel row : childModels) {
+                    ArrayList<Product> filteredList = new ArrayList<>();
+                    if(charSequence.equals("men")){
+                        for (Product productRow : childModels) {
 
 
-                        if (row.getProductName().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row);
-                            Log.v("SelectedVal",""+filteredList.size());
-                            Log.v("WhoIsMe",""+row.getProductName());
-                            Log.v("WhoIsMe",""+row.getPrice());
+                            if (productRow.getGenderCategory().toLowerCase().contains(charString.toLowerCase())) {
+                                filteredList.add(productRow);
+                                Log.v("SelectedVal",""+filteredList.size());
+                                Log.v("WhoIsMe",""+productRow.getProductName());
+                                Log.v("WhoIsMe",""+productRow.getPrice());
 
+                            }
                         }
                     }
+                    else{
+                        for (Product productRow : childModels) {
+
+
+                            if (productRow.getProductName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteredList.add(productRow);
+                                Log.v("SelectedVal",""+filteredList.size());
+                                Log.v("WhoIsMe",""+productRow.getProductName());
+                                Log.v("WhoIsMe",""+productRow.getPrice());
+
+                            }
+                        }
+                    }
+
 
 
 
@@ -100,7 +118,7 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-                filterModel = (ArrayList<ChildModel>) filterResults.values;
+                filterModel = (ArrayList<Product>) filterResults.values;
                 for (int i=0;i<filterModel.size();i++){
                     Log.v("TAG",""+filterModel.get(i).getProductName());
                 }
