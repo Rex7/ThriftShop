@@ -14,10 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.thriftshop.homecontent.ChildModel;
+import  static  com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
+import com.bumptech.glide.request.RequestOptions;
 import com.example.thriftshop.R;
 import com.example.thriftshop.searchcontent.model.Product;
-import com.example.thriftshop.searchcontent.model.ProductImpl;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,14 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
     public void onBindViewHolder(@NonNull SearchAdapter.Viewholders holder, int position) {
         holder.nameOfProduct.setText(filterModel.get(position).getProductName());
         holder.price.setText(""+filterModel.get(position).getPrice());
-        Glide.with(ctx).load(filterModel.get(position).getImage()).into(holder.imageView);
+        Glide.with(ctx).load(filterModel.get(position)
+                .getImage())
+                .transition(withCrossFade())
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.ic_background)
+                        .error(R.drawable.ic_background)
+                )
+                .into(holder.imageView);
     }
 
     @Override

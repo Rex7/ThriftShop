@@ -34,10 +34,11 @@
     <string name="men">men</string>
     <string name="women">women</string>
     <string name="kids">kids</string>
-    <string name="filtered_text">showing %1$d results. </string>
+    <string name="filtered_text">show %1$d results </string>
     <string name="noResults">no result found.</string>
     <string name="google">Google</string>
     <string name="enter_mobile_number">enter mobile number</string>
+    <string name="rent">rent</string>
 
     <array name="suggestion">
         <item>jacket</item>

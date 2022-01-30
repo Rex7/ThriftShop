@@ -146,6 +146,12 @@ RecyclerView categoryRecycle;
             super(itemView);
             categoryRecycle=itemView.findViewById(R.id.categoryRecycle);
             title=itemView.findViewById(R.id.title_parent);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.v("Parentadapter",""+getAdapterPosition());
+                }
+            });
         }
     }
     public void setSubTitle(){

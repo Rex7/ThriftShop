@@ -3,9 +3,13 @@ package com.example.thriftshop.searchcontent;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.thriftshop.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -22,19 +26,40 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements Mate
     MaterialButtonToggleGroup typeToggle;
     private final static String TAG = "FilterBottomSheet";
     private String query;
+    int size;
 
     public FilterBottomSheet(Context ctx) {
         this.ctx = ctx;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+
     @SuppressLint("RestrictedApi")
     @Override
-    public void setupDialog(Dialog dialog, int style) {
+    public void setupDialog(@NonNull Dialog dialog, int style) {
         super.setupDialog(dialog, style);
         View v = View.inflate(getContext(), R.layout.bottomsheet, null);
         categooryToggle = v.findViewById(R.id.toggleCategory);
         typeToggle = v.findViewById(R.id.typetoggle);
         filter = v.findViewById(R.id.filterButton);
+        if (filter!=null){
+
+            filter.setText(getResources().getString(R.string.filtered_text, size));
+            Log.v(TAG, "setUpdialog: " + size);
+        }
+        filter.setOnClickListener(view -> dismiss());
 
 
         //all category button initialized
@@ -50,11 +75,14 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements Mate
 
 
     public void updateButtonCount(int count) {
+        size = count;
         Log.v("UpdateButton", "" + count);
         if (filter != null) {
             Log.v("UpdateButton", "inside if" + count);
-            filter.setText(getResources().getString(R.string.filtered_text, count));
+            filter.setText(ctx.getResources().getString(R.string.filtered_text, count));
             Log.v(TAG, "updateButtonCount: " + count);
+        } else {
+            Log.v("UpdateButton", "inside else" + count);
         }
     }
 

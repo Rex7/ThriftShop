@@ -1,6 +1,8 @@
 package com.example.thriftshop.homecontent;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +39,18 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
+        View categoryBox;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
           title=  itemView.findViewById(R.id.title_row);
+          categoryBox=itemView.findViewById(R.id.categoryBox);
             itemView.setOnClickListener(this);
         }
         @Override
         public void onClick(View view) {
-
+            Log.v("CategoryDapter",""+getAdapterPosition());
+           // title.setTextColor(Color.CYAN);
+           // categoryBox.setBackgroundColor(Color.RED);
         }
     }
 }

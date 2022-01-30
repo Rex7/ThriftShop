@@ -27,6 +27,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData {
     RecyclerView recyclerView;
     SearchAdapter searchAdapter;
     ArrayList<Product> filterModel;
+    ArrayList<Product> productArrayList;
 
     FilterBottomSheet filterBottomSheet;
     ProductImpl productimpl;
@@ -45,11 +46,6 @@ public class SearchActivity extends AppCompatActivity implements TransferData {
         productimpl = ProductImpl.getDatabase(getApplicationContext());
         filter = findViewById(R.id.filterIcon);
         filterBottomSheet = new FilterBottomSheet(getApplicationContext());
-        filter.setOnClickListener(view -> {
-
-            filterBottomSheet.setQuery(query);
-            filterBottomSheet.show(getSupportFragmentManager(), "showing");
-        });
 
         filterModel = populateParentArray();
         searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
@@ -60,8 +56,16 @@ public class SearchActivity extends AppCompatActivity implements TransferData {
             query = getIntent().getStringExtra(SearchManager.QUERY);
             Log.d("TAG", "onCreate: " + query);
 
-            HandleSearchQuery(query);
+           HandleSearchQuery(query);
         }
+        filter.setOnClickListener(view -> {
+            filterBottomSheet.setQuery(query);
+
+            Log.v("SearchActivity","Size"+size);
+            filterBottomSheet.show(getSupportFragmentManager(), "showing");
+            filterBottomSheet.updateButtonCount(size);
+        });
+
     }
 
     public int HandleSearchQuery(String query) {
@@ -71,7 +75,8 @@ public class SearchActivity extends AppCompatActivity implements TransferData {
 
     public void handleSearchQueryFilter(String productName, String category, int type) {
 
-        ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(query, category, type);
+         productArrayList = (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(query, category, type);
+         size=productArrayList.size();
         Log.v("SearchActivity", "" + productArrayList.size());
         filterBottomSheet.updateButtonCount(productArrayList.size());
         Log.v("SearchActivity", "handleSearchQueryFilter");
@@ -84,6 +89,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData {
     public void handleSearchByCategory(String productName, String category) {
         ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByCategoryFilter(query, category);
         Log.v("SearchActivity", "handleSearchByCategory" + productArrayList.size());
+        size=productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
         searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
         recyclerView.setAdapter(searchAdapter);
@@ -93,6 +99,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData {
     public void handleSearchByType(String productName, int type) {
         ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByTypeFilter(query, type);
         Log.v("SearchActivity", "handleSearchByType" + productArrayList.size());
+        size=productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
         searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
         recyclerView.setAdapter(searchAdapter);
@@ -132,6 +139,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData {
     @Override
     public void setData(int res) {
         Log.v("setData", "called" + res);
+        size=res;
         filterBottomSheet.updateButtonCount(res);
     }
 }

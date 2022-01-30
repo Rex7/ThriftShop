@@ -31,7 +31,8 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
         setContentView(R.layout.activity_content_page);
         bottomNavigationView = findViewById(R.id.bottomview);
 
-        //dummyData();
+
+
 
 
         AsyncTask.execute(new Runnable() {
@@ -39,6 +40,10 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
             public void run() {
                 productIml = ProductImpl.getDatabase(getApplicationContext());
                 productArrayList = (ArrayList<Product>) productIml.productDao().getAllProduct();
+                if(productArrayList.size()==0){
+                    productArrayList=  dummyData();
+                    productIml.productDao().addProduct(productArrayList);
+                }
                 Log.v("ContentPage",""+productArrayList.size());
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(getApplicationContext(), productArrayList)).commit();
 
@@ -91,7 +96,7 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
         productArrayList.add(new Product("Crystal Bracelet", 1500, "women", R.drawable.bracelrt, 1));
         productArrayList.add(new Product("denim jacket", 5000, "men", R.drawable.jacketdenim, 1));
         productArrayList.add(new Product("Nike Sports special", 5000, "men", R.drawable.shoelouis, 1));
-        productIml.productDao().addProduct(productArrayList);
+
         return productArrayList;
 
     }
