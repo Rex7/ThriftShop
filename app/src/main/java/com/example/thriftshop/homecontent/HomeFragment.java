@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +20,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.thriftshop.ContentPage;
 import com.example.thriftshop.R;
 import com.example.thriftshop.searchcontent.SearchActivity;
 import com.example.thriftshop.searchcontent.SearchAppActivity;
 import com.example.thriftshop.searchcontent.model.Product;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -77,39 +80,11 @@ return view;
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    public ArrayList<ParentModel> populateParentArray() {
 
-        String[] featuredProducts = {"High heels ", "T Shirt ", "Jeans", "jewels "};
-        String[] Explore = {"Necklace", "Ring", "Earring", "Bracelet"};
-        String[] jewels = {"jacket", "shoe louis", "Saree", "black jacket"};
-
-        int[] featuredProduct = {R.drawable.highheels, R.drawable.jeans, R.drawable.bag, R.drawable.tshirt};
-        int[] explore = {R.drawable.necklace, R.drawable.ring, R.drawable.earring, R.drawable.bracelrt};
-        int[] jewelsImage = {R.drawable.jacketdenim, R.drawable.shoelouis, R.drawable.saree, R.drawable.blackjacket};
-
-        String[] title = {"Category","Featured ", "Explore", "Fresh In trends"};
-        ArrayList<ParentModel> parentModel = new ArrayList<>();
-        for (int i = 0; i <=3; i++) {
-            ArrayList<ChildModel> childModels = new ArrayList<>();
-            for (int j = 0; j <4; j++) {
-                switch (i) {
-                    case 1:
-                        childModels.add(new ChildModel(featuredProducts[j], "$ 900", featuredProduct[j]));
-                        break;
-                    case 2:
-                        childModels.add(new ChildModel(Explore[j], "$ 200", explore[j]));
-                        break;
-                    case 3:
-                        childModels.add(new ChildModel(jewels[j], "$ 150", jewelsImage[j]));
-                        break;
-
-                }
-
-            }
-            parentModel.add(new ParentModel(title[i], childModels));
-        }
-        return parentModel;
-
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+       getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.bottomview).setVisibility(View.VISIBLE);
     }
 }

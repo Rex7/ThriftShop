@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,29 +25,26 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
     BottomNavigationView bottomNavigationView;
     ProductImpl productIml;
     ArrayList<Product> productArrayList;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_page);
         bottomNavigationView = findViewById(R.id.bottomview);
-
-
-
-
+        progressBar = findViewById(R.id.progressBar);
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 productIml = ProductImpl.getDatabase(getApplicationContext());
                 productArrayList = (ArrayList<Product>) productIml.productDao().getAllProduct();
-                if(productArrayList.size()==0){
-                    productArrayList=  dummyData();
+                if (productArrayList.size() == 0) {
+                    productArrayList = dummyData();
                     productIml.productDao().addProduct(productArrayList);
                 }
-                Log.v("ContentPage",""+productArrayList.size());
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(getApplicationContext(), productArrayList)).commit();
-
+                Log.v("ContentPage", "" + productArrayList.size());
             }
         });
 
@@ -55,14 +53,13 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
             switch (item.getItemId()) {
                 case R.id.search_drawer:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new SearchFragment(getApplicationContext())).commit();
-                    return true;
+                    break;
+
                 case R.id.home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(getApplicationContext(), productArrayList)).commit();
-
-
-                default:
-                    return true;
+                    break;
             }
+            return true;
         });
 
     }

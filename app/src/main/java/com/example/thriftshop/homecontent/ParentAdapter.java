@@ -81,7 +81,6 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        Log.v("ParentAdapter",""+position);
         if(position==0){
             return 101;
         }
@@ -149,7 +148,7 @@ RecyclerView categoryRecycle;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.v("Parentadapter",""+getAdapterPosition());
+
                 }
             });
         }

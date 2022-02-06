@@ -11,11 +11,11 @@
         android:id="@+id/backArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
-        android:src="@drawable/iconback"
-        android:focusable="true" />
+        android:focusable="true"
+        android:src="@drawable/iconback" />
     <TextView
         android:id="@+id/title_text"
         android:text="@string/verification"

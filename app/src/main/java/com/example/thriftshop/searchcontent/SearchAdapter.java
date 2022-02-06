@@ -90,9 +90,6 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
 
                             if (productRow.getGenderCategory().toLowerCase().contains(charString.toLowerCase())) {
                                 filteredList.add(productRow);
-                                Log.v("SelectedVal",""+filteredList.size());
-                                Log.v("WhoIsMe",""+productRow.getProductName());
-                                Log.v("WhoIsMe",""+productRow.getPrice());
 
                             }
                         }
@@ -103,9 +100,6 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
 
                             if (productRow.getProductName().toLowerCase().contains(charString.toLowerCase())) {
                                 filteredList.add(productRow);
-                                Log.v("SelectedVal",""+filteredList.size());
-                                Log.v("WhoIsMe",""+productRow.getProductName());
-                                Log.v("WhoIsMe",""+productRow.getPrice());
 
                             }
                         }
@@ -127,13 +121,13 @@ public class SearchAdapter  extends  RecyclerView.Adapter<SearchAdapter.Viewhold
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
                 filterModel = (ArrayList<Product>) filterResults.values;
-                for (int i=0;i<filterModel.size();i++){
-                    Log.v("TAG",""+filterModel.get(i).getProductName());
-                }
                 notifyDataSetChanged();
 
             }
         };
+    }
+    public void setNumberOfProduct(int numberOfProduct){
+        transferData.setData(numberOfProduct);
     }
 
 
