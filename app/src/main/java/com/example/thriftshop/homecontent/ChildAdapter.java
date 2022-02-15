@@ -18,12 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.thriftshop.R;
+import com.example.thriftshop.searchcontent.model.Product;
 
 public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders> implements Filterable {
-        private  Context ctx;
-        private  ArrayList<ChildModel>childModels;
-        private ArrayList<ChildModel> filterModel;
-        public ChildAdapter(ArrayList<ChildModel> childModels,Context ctx){
+        private final Context ctx;
+        private final ArrayList<Product>childModels;
+        private ArrayList<Product> filterModel;
+        public ChildAdapter(ArrayList<Product> childModels, Context ctx){
             this.ctx=ctx;
             this.childModels=childModels;
             this.filterModel=childModels;
@@ -40,8 +41,8 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
         @Override
         public void onBindViewHolder(@NonNull Viewholders viewholders, int i) {
             viewholders.nameOfProduct.setText(childModels.get(i).getProductName());
-            viewholders.price.setText(childModels.get(i).getPrice());
-            Glide.with(ctx).load(childModels.get(i).getIcon()).into(viewholders.imageView);
+            viewholders.price.setText(""+childModels.get(i).getPrice());
+            Glide.with(ctx).load(childModels.get(i).getImage()).into(viewholders.imageView);
 
 
         }
@@ -60,15 +61,15 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
                 if (charString.isEmpty()) {
                     filterModel = childModels;
                 } else {
-                    ArrayList<ChildModel> filteredList = new ArrayList<>();
-                    for (ChildModel row : childModels) {
+                    ArrayList<Product> filteredList = new ArrayList<>();
+                    for (Product product : childModels) {
 
 
-                            if (row.getProductName().toLowerCase().contains(charString.toLowerCase())) {
-                                filteredList.add(row);
+                            if (product.getProductName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteredList.add(product);
                                 Log.v("SelectedVal",""+filteredList.size());
-                                Log.v("TAG",""+row.getProductName());
-                                Log.v("TAG",""+row.getPrice());
+                                Log.v("TAG",""+product.getProductName());
+                                Log.v("TAG",""+product.getPrice());
                             }
                         }
 
@@ -85,7 +86,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-                filterModel = (ArrayList<ChildModel>) filterResults.values;
+                filterModel = (ArrayList<Product>) filterResults.values;
                for (int i=0;i<filterModel.size();i++){
                    Log.v("TAG",""+filterModel.get(i).getProductName());
                }

@@ -11,11 +11,11 @@
         android:id="@+id/backArrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
-        android:src="@drawable/iconback"
-        android:focusable="true" />
+        android:focusable="true"
+        android:src="@drawable/iconback" />
     <TextView
         android:id="@+id/title_text"
         android:text="@string/verification"
@@ -116,7 +116,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:layout_marginStart="50dp"
-        android:text="@string/i_didnt_recive_the_code" />
+        android:text="@string/didntreceivethecode" />
 
     <TextView
         android:id="@+id/resendOtp"
@@ -129,7 +129,7 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/resend_otp"
-        android:textColor="@color/button_color" />
+        android:textColor="@color/switch_button_color" />
 
     <Button
         android:layout_width="wrap_content"
@@ -137,9 +137,10 @@
         android:layout_below="@+id/resendOtp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
+        android:gravity="center"
         android:background="@drawable/ic_proceed"
-        android:text="@string/proceed"
         android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/proceed"
 
         app:backgroundTint="@null" />
 

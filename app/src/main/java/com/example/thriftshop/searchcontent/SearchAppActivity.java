@@ -36,6 +36,7 @@ public class SearchAppActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.searchmenu,menu);
         MenuItem searchMenu=menu.findItem(R.id.action_search);
+
         SearchView searchView= (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.findViewById(androidx.appcompat.R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
 

@@ -30,7 +30,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.Viewhold
         return listOfHistory.length;
     }
 
-    public class Viewholder  extends  RecyclerView.ViewHolder{
+     class Viewholder  extends  RecyclerView.ViewHolder{
         TextView historyText;
         public Viewholder(@NonNull View itemView) {
             super(itemView);

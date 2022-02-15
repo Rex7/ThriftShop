@@ -25,12 +25,12 @@
 
         <ImageView
             android:id="@+id/sortImage"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="4dp"
-            android:src="@drawable/sort" />
+            android:src="@drawable/ic_sort_icon" />
 
         <TextView
             android:id="@+id/sortText"
@@ -48,6 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginStart="250dp"
             android:layout_marginTop="4dp"
             android:contentDescription="@string/todo"
@@ -61,6 +63,8 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/filterIcon"
             android:text="@string/filter"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="#68622C"
             android:textSize="23sp" />
 

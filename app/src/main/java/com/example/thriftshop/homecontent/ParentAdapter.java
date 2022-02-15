@@ -21,17 +21,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thriftshop.R;
+import com.example.thriftshop.searchcontent.model.Product;
 
 public class ParentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
     Context ctx;
     RecyclerView.RecycledViewPool recycledViewPool;
-    ArrayList<ParentModel> parentModel;
-    ArrayList<ParentModel> filterModel;
-    public ParentAdapter(Context ctx,ArrayList<ParentModel> parentModel){
+    ArrayList<Product> parentModel;
+    ArrayList<Product> filterModel;
+    ArrayList<String> subTitle=new ArrayList<>();
+    public ParentAdapter(Context ctx,ArrayList<Product> parentModel){
 
         this.ctx=ctx;
         this.parentModel=parentModel;
         recycledViewPool=new RecyclerView.RecycledViewPool();
+        setSubTitle();
     }
     @NonNull
     @Override
@@ -59,9 +62,10 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
            viewHolders2.categoryRecycle.setAdapter(childAdapter);
 
        }else {
+           Log.v("onBindViewHolder",""+i);
            ParentViewHolder viewHolders1=(ParentViewHolder)view;
-           viewHolders1.title.setText(parentModel.get(i).getTitle());
-           ChildAdapter childAdapter=new ChildAdapter(parentModel.get(i).getChilds(),ctx.getApplicationContext());
+           viewHolders1.title.setText(subTitle.get(i-1));
+           ChildAdapter childAdapter=new ChildAdapter(parentModel,ctx.getApplicationContext());
            viewHolders1.childRecycler.setRecycledViewPool(recycledViewPool);
            viewHolders1.childRecycler.setLayoutManager(new LinearLayoutManager(ctx.getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
            viewHolders1.childRecycler.setItemAnimator(new DefaultItemAnimator());
@@ -72,12 +76,11 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return parentModel.size();
+        return subTitle.size()+1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        Log.v("ParentAdapter",""+position);
         if(position==0){
             return 101;
         }
@@ -95,14 +98,12 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 if (charString.isEmpty()) {
                     filterModel = parentModel;
                 } else {
-                    ArrayList<ParentModel> filteredList = new ArrayList<>();
-                    for (ParentModel row : parentModel) {
+                    ArrayList<Product> filteredList = new ArrayList<>();
+                    for (Product product : parentModel) {
 
-                        for (int i=0;i<row.getChilds().size();i++){
-                            Log.v("SelectedVal",""+row.getChilds().get(i).getProductName()+" charString "+charString);
-                            if (row.getChilds().get(i).getProductName().toLowerCase().contains(charString.toLowerCase())) {
-                                filteredList.add(row);
-                                Log.v("SelectedVal",""+filteredList.size());
+                        for (int i=0;i<parentModel.size();i++){
+                            if (product.getProductName().toLowerCase().contains(charString.toLowerCase())) {
+                                filteredList.add(product);
                             }
                         }
 
@@ -119,7 +120,7 @@ public class ParentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-                filterModel = (ArrayList<ParentModel>) filterResults.values;
+                filterModel = (ArrayList<Product>) filterResults.values;
 
             }
         };
@@ -144,7 +145,18 @@ RecyclerView categoryRecycle;
             super(itemView);
             categoryRecycle=itemView.findViewById(R.id.categoryRecycle);
             title=itemView.findViewById(R.id.title_parent);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
         }
+    }
+    public void setSubTitle(){
+        subTitle.add("Category");
+        subTitle.add("Featured");
+        subTitle.add("Fresh In trends");
     }
 
 }

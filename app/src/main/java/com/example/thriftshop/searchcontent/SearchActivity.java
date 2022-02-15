@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -18,80 +19,115 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.thriftshop.homecontent.ChildModel;
 import com.example.thriftshop.R;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.example.thriftshop.searchcontent.model.Product;
+import com.example.thriftshop.searchcontent.model.ProductImpl;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity implements  TransferData{
+public class SearchActivity extends AppCompatActivity implements TransferData, View.OnClickListener {
     RecyclerView recyclerView;
     SearchAdapter searchAdapter;
-    ArrayList<ChildModel> filterModel;
-    BottomSheetBehavior bottomSheetBehavior;
+    ArrayList<Product> filterModel;
+    ArrayList<Product> productArrayList;
     FilterBottomSheet filterBottomSheet;
+    ProductImpl productimpl;
     ImageView filter;
+    TextView filterText;
     Toolbar toolbar;
     String query;
+    SearchView searchView;
     int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //initializing views
         setContentView(R.layout.activity_search_able);
         recyclerView = findViewById(R.id.recycleView);
         toolbar = findViewById(R.id.toolbar_Search);
+        filter = findViewById(R.id.filterIcon);
+        filterText = findViewById(R.id.filter);
+        filterBottomSheet = new FilterBottomSheet(getApplicationContext());
         setSupportActionBar(toolbar);
-        filter=findViewById(R.id.filterIcon);
-        filterBottomSheet =new FilterBottomSheet(getApplicationContext());
-        filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                filterBottomSheet.setData(populateParentArray());
-                filterBottomSheet.show(getSupportFragmentManager(),"showing");
-            }
-        });
 
-        filterModel = populateParentArray();
+        //setting listener
+        filter.setOnClickListener(this);
+        filterText.setOnClickListener(this);
+
+        //getting database
+        productimpl = ProductImpl.getDatabase(getApplicationContext());
+
+
+        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+            query = getIntent().getStringExtra(SearchManager.QUERY);
+            filterModel = populateParentArray();
+            Log.d("TAG", "onCreateIF: " + query);
+            searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(searchAdapter);
+
+            HandleSearchQuery(query);
+        } else {
+            query = getIntent().getStringExtra("query");
+            filterModel = getProductByCategory(query);
+            setDataWithQuery(filterModel);
+
+        }
+
+    }
+
+    public void setDataWithQuery(ArrayList<Product> filterModel) {
         searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
+        searchAdapter.setNumberOfProduct(filterModel.size());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(searchAdapter);
-        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-             query = getIntent().getStringExtra(SearchManager.QUERY);
-            Log.d("TAG", "onCreate: " + query);
-
-            HandleSearchQuery(query);
-        }
     }
 
-    public int HandleSearchQuery(String query) {
-
+    public void HandleSearchQuery(String query) {
         searchAdapter.getFilter().filter(query);
-        return  size;
+
     }
 
+    public void handleSearchQueryFilter(String productName, String category, int type) {
 
-    public ArrayList<ChildModel> populateParentArray() {
-        ArrayList<ChildModel> childModels = new ArrayList<>();
+        productArrayList = (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(productName, category, type);
+        size = productArrayList.size();
+        filterBottomSheet.updateButtonCount(productArrayList.size());
+        searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
+        recyclerView.setAdapter(searchAdapter);
+        searchAdapter.notifyDataSetChanged();
 
-        childModels.add(new ChildModel("High heels", "$100", R.drawable.highheels));
-        childModels.add(new ChildModel("T Shirt ", "$250", R.drawable.tshirt));
-        childModels.add(new ChildModel("jeans", "$80", R.drawable.jeans));
-        childModels.add(new ChildModel("jewels", "$180", R.drawable.jewels));
-        childModels.add(new ChildModel("Necklace", "$100", R.drawable.necklace));
-        childModels.add(new ChildModel("Ring", "$100", R.drawable.ring));
-        childModels.add(new ChildModel("Earring", "$100", R.drawable.earring));
-        childModels.add(new ChildModel("Bracelet", "$100", R.drawable.bracelrt));
-        childModels.add(new ChildModel("jacket denim", "$100", R.drawable.jacketdenim));
-        childModels.add(new ChildModel("Shoe louis", "$100", R.drawable.shoelouis));
-        childModels.add(new ChildModel("Saree", "$100", R.drawable.saree));
-        childModels.add(new ChildModel("black jacket", "$100", R.drawable.blackjacket));
+    }
 
+    public void handleSearchByCategory(String productName, String category) {
+        ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByCategoryFilter(productName, category);
+        size = productArrayList.size();
+        filterBottomSheet.updateButtonCount(productArrayList.size());
+        searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
+        recyclerView.setAdapter(searchAdapter);
+        searchAdapter.notifyDataSetChanged();
+    }
 
-        return childModels;
+    public void handleSearchByType(String productName, int type) {
+        ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByTypeFilter(productName, type);
+        size = productArrayList.size();
+        filterBottomSheet.updateButtonCount(productArrayList.size());
+        searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
+        recyclerView.setAdapter(searchAdapter);
+        searchAdapter.notifyDataSetChanged();
+    }
 
+    public ArrayList<Product> populateParentArray() {
+        return (ArrayList<Product>) productimpl.productDao().getAllProduct();
+    }
+
+    public ArrayList<Product> getProductByCategory(String category) {
+        return (ArrayList<Product>) productimpl.productDao().getAllProduct(category);
     }
 
     @Override
@@ -111,20 +147,44 @@ public class SearchActivity extends AppCompatActivity implements  TransferData{
                 return false;
             }
         });
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-       searchView.findViewById(androidx.appcompat.R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
-        searchView.setQueryHint("who");
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.findViewById(androidx.appcompat.R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.v("SearchActivity", "" + query);
+                ArrayList<Product> filterModel = (ArrayList<Product>) productimpl.productDao().getProductByName(query);
+                setDataWithQuery(filterModel);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        // searchView.setQueryHint("who");
         searchMenu.expandActionView();
         searchView.clearFocus();
         searchView.setQuery(query, false);
-
-
         return true;
     }
 
     @Override
     public void setData(int res) {
-   Log.v("setData","called"+res);
-filterBottomSheet.updateButtonCount(res);
+        Log.v("setData", "called" + res);
+        size = res;
+        filterBottomSheet.updateButtonCount(res);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int Id = view.getId();
+        if (Id == R.id.filter || Id == R.id.filterIcon) {
+            filterBottomSheet.setQuery(query);
+            Log.v("SearchActivityLOG", "quick" + query);
+            filterBottomSheet.show(getSupportFragmentManager(), "showing");
+            filterBottomSheet.updateButtonCount(size);
+        }
     }
 }

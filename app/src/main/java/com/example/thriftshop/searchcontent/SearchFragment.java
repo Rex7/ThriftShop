@@ -28,18 +28,20 @@ public class SearchFragment extends Fragment {
     RecyclerView recyclerViewHistory;
     HistoryAdapter historyAdapter;
     Context ctx;
-    public SearchFragment(Context ctx){
-        this.ctx=ctx;
+
+    public SearchFragment(Context ctx) {
+        this.ctx = ctx;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.frag_searchapp,container,false);
-        Log.v("SearchFragment","called");
-        toolbar=view.findViewById(R.id.toolbar_SearchApp);
+        View view = inflater.inflate(R.layout.frag_searchapp, container, false);
+        Log.v("SearchFragment", "called");
+        toolbar = view.findViewById(R.id.toolbar_SearchApp);
         setHasOptionsMenu(true);
-       ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        recyclerViewHistory=view.findViewById(R.id.recyclview_searchApp);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        recyclerViewHistory = view.findViewById(R.id.recyclview_searchApp);
         historyAdapter = new HistoryAdapter();
         recyclerViewHistory.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
         recyclerViewHistory.setAdapter(historyAdapter);
@@ -48,9 +50,9 @@ public class SearchFragment extends Fragment {
 
 
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.searchmenu,menu);
-        MenuItem searchMenu=menu.findItem(R.id.action_search);
-        SearchView searchView= (SearchView) searchMenu.getActionView();
+        inflater.inflate(R.menu.searchmenu, menu);
+        MenuItem searchMenu = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchMenu.getActionView();
         searchView.findViewById(androidx.appcompat.R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
         searchView.clearFocus();
         searchMenu.expandActionView();
@@ -59,18 +61,17 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onMenuItemActionExpand(MenuItem menuItem) {
 
-            return true;
+                return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                ((ContentPage)getActivity()).goBackToHomeFragment();
+                ((ContentPage) requireActivity()).goBackToHomeFragment();
                 return false;
             }
         });
 
     }
-
 
 
 }

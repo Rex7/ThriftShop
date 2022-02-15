@@ -8,9 +8,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThriftShop">
         <activity
+            android:name=".DetailActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
             android:name=".searchcontent.SearchAppActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".searchcontent.SearchActivity"
             android:exported="true">
@@ -30,7 +35,6 @@
 
         <activity
             android:name=".ContentPage"
-
             android:exported="true">
             <meta-data
                 android:name="android.app.default_searchable"
