@@ -43,6 +43,8 @@
     <string name="priceLabel">Price</string>
     <string name="priceData"> %1$.2f  </string>
     <string name="cart">cart</string>
+    <string name="sleak_high_heels">Sleak high heels</string>
+    <string name="buy_now">Buy Now</string>
 
     <array name="suggestion">
         <item>jacket</item>
