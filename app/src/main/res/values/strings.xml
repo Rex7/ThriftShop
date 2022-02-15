@@ -39,6 +39,10 @@
     <string name="google">Google</string>
     <string name="enter_mobile_number">enter mobile number</string>
     <string name="rent">rent</string>
+    <string name="sample_text">Its a heels best worn for party and casual events</string>
+    <string name="priceLabel">Price</string>
+    <string name="priceData"> %1$.2f  </string>
+    <string name="cart">cart</string>
 
     <array name="suggestion">
         <item>jacket</item>

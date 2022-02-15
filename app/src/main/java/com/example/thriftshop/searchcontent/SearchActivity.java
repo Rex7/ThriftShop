@@ -25,18 +25,18 @@ import com.example.thriftshop.searchcontent.model.ProductImpl;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity implements TransferData , View.OnClickListener {
+public class SearchActivity extends AppCompatActivity implements TransferData, View.OnClickListener {
     RecyclerView recyclerView;
     SearchAdapter searchAdapter;
     ArrayList<Product> filterModel;
     ArrayList<Product> productArrayList;
-
     FilterBottomSheet filterBottomSheet;
     ProductImpl productimpl;
     ImageView filter;
     TextView filterText;
     Toolbar toolbar;
     String query;
+    SearchView searchView;
     int size;
 
     @Override
@@ -48,10 +48,9 @@ public class SearchActivity extends AppCompatActivity implements TransferData , 
         recyclerView = findViewById(R.id.recycleView);
         toolbar = findViewById(R.id.toolbar_Search);
         filter = findViewById(R.id.filterIcon);
-        filterText=findViewById(R.id.filter);
+        filterText = findViewById(R.id.filter);
         filterBottomSheet = new FilterBottomSheet(getApplicationContext());
         setSupportActionBar(toolbar);
-
 
 
         //setting listener
@@ -62,43 +61,43 @@ public class SearchActivity extends AppCompatActivity implements TransferData , 
         productimpl = ProductImpl.getDatabase(getApplicationContext());
 
 
-
-
         if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
             query = getIntent().getStringExtra(SearchManager.QUERY);
             filterModel = populateParentArray();
-            Log.d("TAG", "onCreate: " + query);
+            Log.d("TAG", "onCreateIF: " + query);
             searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(searchAdapter);
 
-           HandleSearchQuery(query);
-        }
-        else{
+            HandleSearchQuery(query);
+        } else {
             query = getIntent().getStringExtra("query");
-            filterModel=getProductByCategory(query);
-            searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
-            searchAdapter.setNumberOfProduct(filterModel.size());
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(searchAdapter);
-            Log.d("TAG", "onCreate: " + query+"ize of array"+filterModel.size());
+            filterModel = getProductByCategory(query);
+            setDataWithQuery(filterModel);
+
         }
+
     }
 
-    public int HandleSearchQuery(String query) {
+    public void setDataWithQuery(ArrayList<Product> filterModel) {
+        searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
+        searchAdapter.setNumberOfProduct(filterModel.size());
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(searchAdapter);
+    }
+
+    public void HandleSearchQuery(String query) {
         searchAdapter.getFilter().filter(query);
-        return size;
+
     }
 
     public void handleSearchQueryFilter(String productName, String category, int type) {
 
-         productArrayList = (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(query, category, type);
-         size=productArrayList.size();
-        Log.v("SearchActivity", "" + productArrayList.size());
+        productArrayList = (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(productName, category, type);
+        size = productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
-        Log.v("SearchActivity", "handleSearchQueryFilter");
         searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
         recyclerView.setAdapter(searchAdapter);
         searchAdapter.notifyDataSetChanged();
@@ -106,9 +105,8 @@ public class SearchActivity extends AppCompatActivity implements TransferData , 
     }
 
     public void handleSearchByCategory(String productName, String category) {
-        ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByCategoryFilter(query, category);
-        Log.v("SearchActivity", "handleSearchByCategory" + productArrayList.size());
-        size=productArrayList.size();
+        ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByCategoryFilter(productName, category);
+        size = productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
         searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
         recyclerView.setAdapter(searchAdapter);
@@ -116,9 +114,8 @@ public class SearchActivity extends AppCompatActivity implements TransferData , 
     }
 
     public void handleSearchByType(String productName, int type) {
-        ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByTypeFilter(query, type);
-        Log.v("SearchActivity", "handleSearchByType" + productArrayList.size());
-        size=productArrayList.size();
+        ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByTypeFilter(productName, type);
+        size = productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
         searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
         recyclerView.setAdapter(searchAdapter);
@@ -129,9 +126,8 @@ public class SearchActivity extends AppCompatActivity implements TransferData , 
         return (ArrayList<Product>) productimpl.productDao().getAllProduct();
     }
 
-    public  ArrayList<Product> getProductByCategory(String category){
-        ArrayList<Product> productArrayList=(ArrayList<Product>)  productimpl.productDao().getAllProduct(category);
-        return productArrayList;
+    public ArrayList<Product> getProductByCategory(String category) {
+        return (ArrayList<Product>) productimpl.productDao().getAllProduct(category);
     }
 
     @Override
@@ -151,9 +147,23 @@ public class SearchActivity extends AppCompatActivity implements TransferData , 
                 return false;
             }
         });
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.findViewById(androidx.appcompat.R.id.search_plate).setBackgroundColor(Color.TRANSPARENT);
-       // searchView.setQueryHint("who");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.v("SearchActivity", "" + query);
+                ArrayList<Product> filterModel = (ArrayList<Product>) productimpl.productDao().getProductByName(query);
+                setDataWithQuery(filterModel);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        // searchView.setQueryHint("who");
         searchMenu.expandActionView();
         searchView.clearFocus();
         searchView.setQuery(query, false);
@@ -163,18 +173,18 @@ public class SearchActivity extends AppCompatActivity implements TransferData , 
     @Override
     public void setData(int res) {
         Log.v("setData", "called" + res);
-        size=res;
+        size = res;
         filterBottomSheet.updateButtonCount(res);
     }
 
     @Override
     public void onClick(View view) {
-        int Id=view.getId();
-     if(Id==R.id.filter || Id== R.id.filterIcon){
-         filterBottomSheet.setQuery(query);
-         Log.v("SearchActivityLOG","Size"+size);
-         filterBottomSheet.show(getSupportFragmentManager(), "showing");
-         filterBottomSheet.updateButtonCount(size);
-     }
+        int Id = view.getId();
+        if (Id == R.id.filter || Id == R.id.filterIcon) {
+            filterBottomSheet.setQuery(query);
+            Log.v("SearchActivityLOG", "quick" + query);
+            filterBottomSheet.show(getSupportFragmentManager(), "showing");
+            filterBottomSheet.updateButtonCount(size);
+        }
     }
 }

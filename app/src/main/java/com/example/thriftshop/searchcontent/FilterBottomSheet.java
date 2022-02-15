@@ -15,6 +15,8 @@ import com.example.thriftshop.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
+import java.util.Objects;
+
 public class FilterBottomSheet extends BottomSheetDialogFragment implements MaterialButtonToggleGroup.OnButtonCheckedListener {
 
     Button filter;
@@ -59,7 +61,7 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements Mate
             filter.setText(getResources().getString(R.string.filtered_text, size));
             Log.v(TAG, "setUpdialog: " + size);
         }
-        filter.setOnClickListener(view -> dismiss());
+        Objects.requireNonNull(filter).setOnClickListener(view -> dismiss());
 
 
         //all category button initialized
@@ -89,15 +91,18 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements Mate
     @Override
     public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
         searchActivity = (SearchActivity) getActivity();
+        Log.v("HandleSearchCategory","old"+query);
+        Log.v("HandleSearchCategory","updated"+searchActivity.searchView.getQuery());
+        String queryupdated=searchActivity.searchView.getQuery().toString();
 
         switch (group.getId()) {
             case R.id.toggleCategory:
                 if (checkedId == R.id.men) {
                     category = "men";
                     if (type == 0) {
-                        searchActivity.handleSearchByCategory(query, category);
+                        searchActivity.handleSearchByCategory(queryupdated, category);
                     } else {
-                        searchActivity.handleSearchQueryFilter(query, category, type);
+                        searchActivity.handleSearchQueryFilter(queryupdated, category, type);
                         Log.v("FilterBottomSheet", "" + type);
                     }
 
@@ -105,17 +110,17 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements Mate
                     Log.v("FilterBottom", "Category women");
                     category = "women";
                     if (type == 0) {
-                        searchActivity.handleSearchByCategory(query, category);
+                        searchActivity.handleSearchByCategory(queryupdated, category);
                     } else {
-                        searchActivity.handleSearchQueryFilter(query, category, type);
+                        searchActivity.handleSearchQueryFilter(queryupdated, category, type);
                     }
 
                 } else if (checkedId == R.id.kids) {
                     category = "kids";
                     if (type == 0) {
-                        searchActivity.handleSearchByCategory(query, category);
+                        searchActivity.handleSearchByCategory(queryupdated, category);
                     } else {
-                        searchActivity.handleSearchQueryFilter(query, category, type);
+                        searchActivity.handleSearchQueryFilter(queryupdated, category, type);
                     }
 
                 }
@@ -125,26 +130,26 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements Mate
                 if (checkedId == R.id.used) {
                     type = 1;
                     if (category.isEmpty()) {
-                        searchActivity.handleSearchByType(query, type);
+                        searchActivity.handleSearchByType(queryupdated, type);
                         Log.v("FilterBottomSheet", "Called");
                     } else {
-                        searchActivity.handleSearchQueryFilter(query, category, type);
+                        searchActivity.handleSearchQueryFilter(queryupdated, category, type);
                         Log.v("FilterBottomSheet", "FullFilterCalled");
 
                     }
                 } else if (checkedId == R.id.unused) {
                     type = 2;
                     if (category.isEmpty()) {
-                        searchActivity.handleSearchByType(query, type);
+                        searchActivity.handleSearchByType(queryupdated, type);
                     } else {
-                        searchActivity.handleSearchQueryFilter(query, category, type);
+                        searchActivity.handleSearchQueryFilter(queryupdated, category, type);
                     }
                 } else if (checkedId == R.id.rent) {
                     type = 3;
                     if (category.isEmpty()) {
-                        searchActivity.handleSearchByType(query, type);
+                        searchActivity.handleSearchByType(queryupdated, type);
                     } else {
-                        searchActivity.handleSearchQueryFilter(query, category, type);
+                        searchActivity.handleSearchQueryFilter(queryupdated, category, type);
                     }
 
                 }

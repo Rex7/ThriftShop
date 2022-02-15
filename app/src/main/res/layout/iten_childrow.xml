@@ -28,7 +28,7 @@
             android:adjustViewBounds="true"
             android:background="@color/switch_button_color"
             android:scaleType="centerCrop"
-            android:src="@drawable/highheels" />
+            android:src="@drawable/heels" />
 
 
 

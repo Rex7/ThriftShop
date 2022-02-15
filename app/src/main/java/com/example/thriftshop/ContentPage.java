@@ -94,6 +94,38 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
         productArrayList.add(new Product("denim jacket", 5000, "men", R.drawable.jacketdenim, 1));
         productArrayList.add(new Product("Nike Sports special", 5000, "men", R.drawable.shoelouis, 1));
 
+       productArrayList.get(0).setItemDescription("Stiletto high heels bought 6 months baack worn just once and best for party and formal events");
+        productArrayList.get(1).setItemDescription("It a perfect wwhite colored t shirt to go with any event");
+        productArrayList.get(2).setItemDescription("Blue denim bought back an year ago still in fresh condition");
+        productArrayList.get(3).setItemDescription("Gold plated in perfect condition worn once");
+        productArrayList.get(4).setItemDescription("Necklace made with south indian style with new design");
+        productArrayList.get(5).setItemDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Vivamus vitae scelerisque ipsum. Proin id turpis ante. In neque risus, rutrum eu auctor id, luctus vel nulla. C");
+        productArrayList.get(6).setItemDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Vivamus vitae scelerisque ipsum. Proin id turpis ante. In neque risus, rutrum eu auctor id, luctus vel nulla. C");
+        productArrayList.get(7).setItemDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Vivamus vitae scelerisque ipsum. Proin id turpis ante. In neque risus, rutrum eu auctor id, luctus vel nulla. C");
+        productArrayList.get(8).setItemDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Vivamus vitae scelerisque ipsum. Proin id turpis ante. In neque risus, rutrum eu auctor id, luctus vel nulla. C");
+        productArrayList.get(9).setItemDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Vivamus vitae scelerisque ipsum. Proin id turpis ante. In neque risus, rutrum eu auctor id, luctus vel nulla. C");
+
+        productArrayList.get(0).setBrandName("Clarke Heels");
+        productArrayList.get(1).setBrandName("Peter England");
+        productArrayList.get(2).setBrandName("denim");
+        productArrayList.get(3).setBrandName("Titan");
+        productArrayList.get(4).setBrandName("Tanishq");
+        productArrayList.get(5).setBrandName("Tanishq");
+        productArrayList.get(6).setBrandName("Tanishq");
+        productArrayList.get(7).setBrandName("Swarovski");
+        productArrayList.get(8).setBrandName("Tanishq");
+        productArrayList.get(9).setBrandName("Nike");
+
+
+
+
+
+
         return productArrayList;
 
     }

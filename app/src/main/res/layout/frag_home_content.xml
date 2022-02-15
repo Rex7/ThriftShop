@@ -61,9 +61,8 @@
             android:fontFamily="@font/robo"
             android:text="@string/UserName"
             android:textColor="#0B0707"
-            android:textStyle="bold"
             android:textSize="25sp"
-            />
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchbar"

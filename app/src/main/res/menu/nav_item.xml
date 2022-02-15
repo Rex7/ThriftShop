@@ -19,9 +19,9 @@
         android:title="@string/person"
         android:visible="true" />
     <item
-        android:id="@+id/logout"
-        android:icon="@drawable/ic_logout"
-        android:title="@string/logout"
+        android:id="@+id/cart"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="@string/cart"
         android:visible="true" />
 
 

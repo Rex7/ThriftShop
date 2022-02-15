@@ -21,8 +21,8 @@ import com.example.thriftshop.R;
 import com.example.thriftshop.searchcontent.model.Product;
 
 public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders> implements Filterable {
-        private  Context ctx;
-        private  ArrayList<Product>childModels;
+        private final Context ctx;
+        private final ArrayList<Product>childModels;
         private ArrayList<Product> filterModel;
         public ChildAdapter(ArrayList<Product> childModels, Context ctx){
             this.ctx=ctx;
