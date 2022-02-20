@@ -70,7 +70,6 @@ public class FilterBottomSheet extends BottomSheetDialogFragment implements Mate
         dialog.setContentView(v);
     }
 
-
     public void setQuery(String query) {
         this.query = query;
     }

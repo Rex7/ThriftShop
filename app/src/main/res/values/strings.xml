@@ -43,8 +43,26 @@
     <string name="priceLabel">Price</string>
     <string name="priceData"> %1$.2f  </string>
     <string name="cart">cart</string>
-    <string name="sleak_high_heels">Sleak high heels</string>
     <string name="buy_now">Buy Now</string>
+    <string name="brand">Brand</string>
+    <string name="clark_heels">Clark heels</string>
+    <string name="size">Size</string>
+    <string name="condition">Condition</string>
+    <string name="pre_owned">Pre-owned</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="item_description">Item Description :</string>
+    <string name="sleak_high_heels">Sleak high heels</string>
+    <string name="_4_inch">4 inch</string>
+    <string name="order_detail">Order Detail</string>
+    <string name="my_cart">My Cart</string>
+    <string name="total">Total</string>
+    <string name="proceed_to_checkout">proceed to checkout</string>
+    <string name="back_arrow">back arrow</string>
+    <string name="used">Used</string>
+    <string name="unused">unused</string>
+    <string name="price_label">price</string>
+    <string name="type_label">Type</string>
+    <string name="image_label">image_label</string>
 
     <array name="suggestion">
         <item>jacket</item>

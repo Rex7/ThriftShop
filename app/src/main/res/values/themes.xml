@@ -1,3 +1,4 @@
+
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ThriftShop" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -15,8 +16,23 @@
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:buttonStyle">@style/ToggleButtonGroupStyle</item>
 
+        <item name="android:windowContentTransitions">true</item>
+
 
     </style>
+    <style name="bottomImageShape" >
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">10%</item>
+        <item name="cornerSizeBottomLeft">10%</item>
+    </style>
+    <style name="roundedCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">10%</item>
+        <item name="cornerSizeTopLeft">10%</item>
+        <item name="cornerSizeBottomRight">10%</item>
+        <item name="cornerSizeBottomLeft">10%</item>
+    </style>
+
 
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">

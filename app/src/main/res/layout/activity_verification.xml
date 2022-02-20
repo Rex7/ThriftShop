@@ -15,7 +15,8 @@
         android:layout_marginTop="20dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/iconback" />
+        android:src="@drawable/backbuttonicon"
+        android:contentDescription="@string/back_arrow" />
     <TextView
         android:id="@+id/title_text"
         android:text="@string/verification"
@@ -31,7 +32,7 @@
         android:text="@string/otpTitle"
         android:layout_below="@+id/title_text"
         android:textSize="12sp"
-        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <com.google.android.material.textfield.TextInputLayout
@@ -58,7 +59,7 @@
         android:layout_marginTop="120dp"
         android:layout_marginStart="25dp"
         android:layout_width="72dp"
-        android:layout_toRightOf="@+id/otpLayout1"
+        android:layout_toEndOf="@+id/otpLayout1"
         app:boxBackgroundColor="#F2F6FE"
         android:layout_height="62dp">
         <com.google.android.material.textfield.TextInputEditText
@@ -76,7 +77,7 @@
         android:layout_marginTop="120dp"
         android:layout_marginStart="25dp"
         android:layout_width="72dp"
-        android:layout_toRightOf="@+id/otpLayout2"
+        android:layout_toEndOf="@+id/otpLayout2"
         app:boxBackgroundColor="#F2F6FE"
         android:layout_height="62dp">
         <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +96,7 @@
         android:layout_marginStart="25dp"
         android:layout_width="72dp"
         android:gravity="center_horizontal"
-        android:layout_toRightOf="@+id/otpLayout3"
+        android:layout_toEndOf="@+id/otpLayout3"
         app:boxBackgroundColor="#F2F6FE"
         android:layout_height="62dp">
         <com.google.android.material.textfield.TextInputEditText
@@ -125,7 +126,7 @@
         android:layout_below="@+id/otpLayout1"
         android:layout_marginStart="5dp"
         android:layout_marginTop="35dp"
-        android:layout_toRightOf="@+id/message"
+        android:layout_toEndOf="@+id/message"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/resend_otp"
@@ -135,11 +136,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/resendOtp"
-        android:layout_centerHorizontal="true"
+     android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:gravity="center"
         android:background="@drawable/ic_proceed"
         android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center"
         android:text="@string/proceed"
 
         app:backgroundTint="@null" />

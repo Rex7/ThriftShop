@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.thriftshop.cart.CartFragment;
 import com.example.thriftshop.homecontent.HomeFragment;
 import com.example.thriftshop.searchcontent.SearchAppActivity;
 import com.example.thriftshop.searchcontent.SearchFragment;
@@ -34,20 +35,16 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
         bottomNavigationView = findViewById(R.id.bottomview);
         progressBar = findViewById(R.id.progressBar);
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                productIml = ProductImpl.getDatabase(getApplicationContext());
-                productArrayList = (ArrayList<Product>) productIml.productDao().getAllProduct();
-                if (productArrayList.size() == 0) {
-                    productArrayList = dummyData();
-                    productIml.productDao().addProduct(productArrayList);
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(getApplicationContext(), productArrayList)).commit();
-                Log.v("ContentPage", "" + productArrayList.size());
+        AsyncTask.execute(() -> {
+            productIml = ProductImpl.getDatabase(getApplicationContext());
+            productArrayList = (ArrayList<Product>) productIml.productDao().getAllProduct();
+            if (productArrayList.size() == 0) {
+                productArrayList = dummyData();
+                productIml.productDao().addProduct(productArrayList);
             }
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(getApplicationContext(), productArrayList)).commit();
+            Log.v("ContentPage", "" + productArrayList.size());
         });
-
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -58,12 +55,16 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
                 case R.id.home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(getApplicationContext(), productArrayList)).commit();
                     break;
+                case R.id.cart:
+                    startActivity(new Intent(this,CartFragment.class));
+                    break;
+
+
             }
             return true;
         });
 
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -77,8 +78,6 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
     public void goBackToHomeFragment() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment(getApplicationContext(), productArrayList)).commit();
         bottomNavigationView.setSelectedItemId(R.id.home);
-
-
     }
 
     public ArrayList<Product> dummyData() {
@@ -94,7 +93,7 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
         productArrayList.add(new Product("denim jacket", 5000, "men", R.drawable.jacketdenim, 1));
         productArrayList.add(new Product("Nike Sports special", 5000, "men", R.drawable.shoelouis, 1));
 
-       productArrayList.get(0).setItemDescription("Stiletto high heels bought 6 months baack worn just once and best for party and formal events");
+        productArrayList.get(0).setItemDescription("Stiletto high heels bought 6 months baack worn just once and best for party and formal events");
         productArrayList.get(1).setItemDescription("It a perfect wwhite colored t shirt to go with any event");
         productArrayList.get(2).setItemDescription("Blue denim bought back an year ago still in fresh condition");
         productArrayList.get(3).setItemDescription("Gold plated in perfect condition worn once");
@@ -121,13 +120,12 @@ public class ContentPage extends AppCompatActivity implements NavigationView.OnN
         productArrayList.get(8).setBrandName("Tanishq");
         productArrayList.get(9).setBrandName("Nike");
 
-
-
-
-
-
         return productArrayList;
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

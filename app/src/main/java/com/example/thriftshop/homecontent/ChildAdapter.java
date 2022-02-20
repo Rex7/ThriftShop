@@ -1,5 +1,7 @@
 package com.example.thriftshop.homecontent;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
         @NonNull
         @Override
         public Viewholders onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.iten_childrow,viewGroup,false);
+            View view=LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_childrow,viewGroup,false);
             return new Viewholders(view);
         }
 
@@ -42,7 +44,9 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.Viewholders>
         public void onBindViewHolder(@NonNull Viewholders viewholders, int i) {
             viewholders.nameOfProduct.setText(childModels.get(i).getProductName());
             viewholders.price.setText(""+childModels.get(i).getPrice());
-            Glide.with(ctx).load(childModels.get(i).getImage()).into(viewholders.imageView);
+            Glide.with(ctx).load(childModels.get(i).getImage())
+                    .transition(withCrossFade())
+                    .into(viewholders.imageView);
 
 
         }

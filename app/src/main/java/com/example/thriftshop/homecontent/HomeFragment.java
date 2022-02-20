@@ -30,18 +30,20 @@ public class HomeFragment extends Fragment {
     SearchView searchView;
     Context ctx;
     ArrayList<Product> productList;
-    public HomeFragment(Context ctx,ArrayList<Product> productList){
-        this.productList=productList;
-        this.ctx=ctx;
+
+    public HomeFragment(Context ctx, ArrayList<Product> productList) {
+        this.productList = productList;
+        this.ctx = ctx;
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.frag_home_content,container,false);
+        View view = inflater.inflate(R.layout.frag_home_content, container, false);
         searchView = view.findViewById(R.id.searchbar);
 
         parentRecycler = view.findViewById((R.id.main_recyclerview));
-        parentAdapter = new ParentAdapter(ctx.getApplicationContext(),productList);
+        parentAdapter = new ParentAdapter(ctx.getApplicationContext(), productList);
         parentRecycler.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
         parentRecycler.setAdapter(parentAdapter);
         ViewCompat.setNestedScrollingEnabled(parentRecycler, false);
@@ -65,10 +67,8 @@ public class HomeFragment extends Fragment {
         });
 
 
-
-return view;
+        return view;
     }
-
 
 
     @Override
@@ -79,7 +79,7 @@ return view;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.progressBar).setVisibility(View.GONE);
         getActivity().findViewById(R.id.bottomview).setVisibility(View.VISIBLE);
     }
 }

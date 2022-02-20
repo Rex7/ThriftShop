@@ -9,18 +9,17 @@
 <RelativeLayout
         tools:context=".ContentPage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/topContent"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@drawable/ic_newtop"
             android:scaleType="centerCrop"
-            android:src="@drawable/newbackgroundimage" />
+            android:src="@drawable/newbackgroundimage"
+            android:contentDescription="@string/image_label" />
 
-        <ImageView
+     <!--   <ImageView
             android:id="@+id/shoppingcart"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -29,7 +28,7 @@
             android:layout_marginEnd="15dp"
             android:src="@drawable/ic_baseline_shopping_cart_24" />
 
-
+-->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile"
             android:layout_width="50dp"
@@ -40,53 +39,49 @@
             android:layout_marginBottom="25dp"
             android:background="@drawable/ic_profile"
             android:src="@drawable/profile" />
-
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
-            android:layout_toEndOf="@+id/profile"
-            android:fontFamily="@font/robo"
+            android:layout_marginEnd="35dp"
+            android:fontFamily="@font/yatra"
             android:text="@string/name"
-            android:textColor="#330504"
-            android:textSize="18sp" />
-
+            android:textColor="#030000"
+            android:textSize="21sp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/nameSub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
-            android:layout_marginStart="90dp"
-            android:fontFamily="@font/robo"
+            android:layout_marginEnd="35dp"
+            android:fontFamily="@font/yatra"
+            android:layout_alignParentEnd="true"
             android:text="@string/UserName"
-            android:textColor="#0B0707"
+            android:textColor="#030000"
             android:textSize="25sp"
             android:textStyle="bold" />
-
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchbar"
             android:layout_width="318dp"
             android:layout_height="64dp"
             android:layout_below="@+id/nameSub"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/ic_searchshape"
             android:gravity="center"
             android:paddingStart="15dp"
+            android:paddingEnd="15dp"
             app:iconifiedByDefault="false"
             app:queryHint="Enter Jewels or clothes" />
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/topContent"
             android:layout_marginTop="2dp">
-
         </androidx.recyclerview.widget.RecyclerView>
-
-
     </RelativeLayout>
 </ScrollView>

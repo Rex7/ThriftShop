@@ -65,7 +65,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData, V
             query = getIntent().getStringExtra(SearchManager.QUERY);
             filterModel = populateParentArray();
             Log.d("TAG", "onCreateIF: " + query);
-            searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
+            searchAdapter = new SearchAdapter(filterModel, this, this);
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(searchAdapter);
@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData, V
     }
 
     public void setDataWithQuery(ArrayList<Product> filterModel) {
-        searchAdapter = new SearchAdapter(filterModel, getApplicationContext(), this);
+        searchAdapter = new SearchAdapter(filterModel, this, this);
         searchAdapter.setNumberOfProduct(filterModel.size());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -98,7 +98,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData, V
         productArrayList = (ArrayList<Product>) productimpl.productDao().getProductAfterFilter(productName, category, type);
         size = productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
-        searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
+        searchAdapter = new SearchAdapter(productArrayList, this, this);
         recyclerView.setAdapter(searchAdapter);
         searchAdapter.notifyDataSetChanged();
 
@@ -108,7 +108,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData, V
         ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByCategoryFilter(productName, category);
         size = productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
-        searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
+        searchAdapter = new SearchAdapter(productArrayList, this, this);
         recyclerView.setAdapter(searchAdapter);
         searchAdapter.notifyDataSetChanged();
     }
@@ -117,7 +117,7 @@ public class SearchActivity extends AppCompatActivity implements TransferData, V
         ArrayList<Product> productArrayList = (ArrayList<Product>) productimpl.productDao().getProductByTypeFilter(productName, type);
         size = productArrayList.size();
         filterBottomSheet.updateButtonCount(productArrayList.size());
-        searchAdapter = new SearchAdapter(productArrayList, getApplicationContext(), this);
+        searchAdapter = new SearchAdapter(productArrayList, this, this);
         recyclerView.setAdapter(searchAdapter);
         searchAdapter.notifyDataSetChanged();
     }

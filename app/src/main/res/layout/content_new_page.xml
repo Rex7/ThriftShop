@@ -23,6 +23,7 @@
         android:background="@drawable/ic_searchshape"
         android:gravity="center"
         android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         app:iconifiedByDefault="false"
         app:queryHint="Enter Jewels or clothes" />
 
@@ -30,15 +31,13 @@
         android:id="@+id/shoppingcart_newcontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="30dp"
-
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:src="@drawable/ic_baseline_shopping_cart_24" />
-
-
+        android:src="@drawable/ic_baseline_shopping_cart_24"
+        android:contentDescription="@string/image_label" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile"
@@ -56,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/profile"
+        android:layout_toEndOf="@+id/profile"
         android:fontFamily="@font/robo"
         android:text="@string/name"
         android:textColor="#330504"

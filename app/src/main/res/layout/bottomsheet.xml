@@ -6,8 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="90dp"
-    >
+    app:behavior_peekHeight="90dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,13 +27,11 @@
             android:text="@string/category"
             android:textSize="21sp" />
 
-
         <RelativeLayout
             android:id="@+id/category_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titleText_bottom"
-           >
+            android:layout_below="@+id/titleText_bottom">
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/toggleCategory"
                 app:singleSelection="true"
@@ -90,9 +87,8 @@
                 android:layout_height="wrap_content">
         <Button
             android:id="@+id/used"
-            android:text="Used"
+            android:text="@string/used"
             android:textAllCaps="false"
-
             android:fontFamily="@font/robo"
             android:insetRight="10dp"
             style="@style/ToggleButtonGroupStyle"
@@ -100,9 +96,8 @@
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/unused"
-            android:text="unused"
+            android:text="@string/unused"
             android:textAllCaps="false"
-
             style="@style/ToggleButtonGroupStyle"
             android:fontFamily="@font/robo"
             android:insetRight="10dp"
@@ -132,7 +127,7 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/robo"
-            android:text="price"
+            android:text="@string/price_label"
             android:textStyle="bold"
             android:textSize="21sp" />
 
@@ -148,7 +143,7 @@
             android:layout_marginBottom="15dp"
             android:textStyle="bold"
             android:fontFamily="@font/robo"
-            android:text="Type"
+            android:text="@string/type_label"
             android:textSize="21sp" />
 
         <SeekBar
@@ -163,9 +158,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/seekBar"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="50dp"
             android:background="@drawable/ic_otp"
             android:text="@string/filter"

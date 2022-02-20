@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -41,15 +42,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Viewholder
     @NonNull
     @Override
     public SearchAdapter.Viewholders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.iten_childrow, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_childrow, parent, false);
         return new Viewholders(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.Viewholders holder, int position) {
         holder.nameOfProduct.setText(filterModel.get(position).getProductName());
-        holder.price.setText(ctx.getResources().getString(R.string.priceData,filterModel.get(position).getPrice()));
-        Log.v("SearchAdapterA",""+filterModel.get(position).getImage());
+        holder.price.setText(ctx.getResources().getString(R.string.priceData, filterModel.get(position).getPrice()));
+        Log.v("SearchAdapterA", "" + filterModel.get(position).getImage());
         Glide.with(ctx).load(filterModel.get(position)
                 .getImage())
                 .transition(withCrossFade())
@@ -81,14 +82,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Viewholder
         @Override
         public void onClick(View view) {
             Intent detailIntent = new Intent(ctx.getApplicationContext(), DetailActivity.class);
-            int position=getAdapterPosition();
-             Product product=filterModel.get(position);
+            int position = getAdapterPosition();
+            Product product = filterModel.get(position);
 
-            detailIntent.putExtra("detalArray",product);
+            detailIntent.putExtra("detalArray", product);
             detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            detailIntent.putExtra("image",String.valueOf(product.getImage()));
-            ctx.startActivity(detailIntent);
-            Log.v("SearchAdapter", "onClick"+product.getProductName());
+            detailIntent.putExtra("image", String.valueOf(product.getImage()));
+            SearchActivity searchActivity = (SearchActivity) ctx;
+            ActivityOptionsCompat optionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(searchActivity, imageView, "imageTransition");
+            ctx.startActivity(detailIntent, optionsCompat.toBundle());
+            Log.v("SearchAdapter", "onClick" + product.getProductName());
         }
     }
 
